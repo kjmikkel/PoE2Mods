@@ -52,6 +52,9 @@ namespace CombatLogExporter
         public static Regex Regex;
 
         [NewMember]
+        public static string MapName;
+
+        [NewMember]
         public static void WriteLog()
         {
             if (InCombat)
@@ -59,7 +62,7 @@ namespace CombatLogExporter
                 InCombat = false;
 
                 // Write the combat log to a file
-                string dateTimeName = $"{CombatLogWriteLocation}{StartOfCombatTime.ToString("yyyy-MM-dd-HH-mm-ss")}.log";
+                string dateTimeName = $"{CombatLogWriteLocation}{CombatLogExporterManager.MapName} - {StartOfCombatTime.ToString("yyyy-MM-dd HH-mm-ss")}.log";
 
                 // Game.Console.AddMessage($"Saving log to {dateTimeName}");
 
@@ -142,6 +145,8 @@ namespace CombatLogExporter
                     // We are done setting everything up
                     CombatLogExporterManager.ConfigHasBeenInit = true;
                 }
+
+                CombatLogExporterManager.MapName = GameState.Instance.CurrentMap.GetDisplayName();
             }
             catch (Exception e)
             {

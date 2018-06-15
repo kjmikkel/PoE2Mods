@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Readme.txt" />
+    <Content Include="ChangeLog.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
@@ -78,6 +79,7 @@ IF NOT EXIST $(TargetDir)%25ModName%25\Mods\%25ModName%25 mkdir $(TargetDir)%25M
 copy $(TargetDir)INIFileParser.dll $(TargetDir)%25ModName%25\Mods\%25ModName%25\.
 
 copy $(SourceDir)..\..\..\LICENSE $(TargetDir)\%25ModName%25\Mods\%25ModName%25\.
+copy $(TargetDir)..\..\ChangeLog.txt $(TargetDir)\%25ModName%25\Mods\%25ModName%25\.
 copy $(TargetDir)%25ModName%25.pw.dll $(TargetDir)\%25ModName%25\Mods\%25ModName%25\.
 copy $(TargetDir)..\..\config.ini $(TargetDir)\%25ModName%25\Mods\%25ModName%25\.
 copy $(TargetDir)..\..\readme.txt $(TargetDir)\%25ModName%25\Mods\%25ModName%25\.

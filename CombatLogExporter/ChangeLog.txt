@@ -1,0 +1,11 @@
+﻿=======================
+= Combat Log Exporter =
+=======================
+
+Release 1.0.1.0 (15/06 - 2018):
+-------------------------------
+The exported combat log is now saved in the following format [Map Name] - [yyyy-MM-dd HH- mm-ss]
+
+Release 1.0.0.0 (15/06 - 2018):
+-------------------------------
+Initial release
