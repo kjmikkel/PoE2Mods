@@ -7,11 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmarterUnpause", "SmarterUn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppInfo", "AppInfo\AppInfo.csproj", "{0F2B20F5-508C-442A-8D0E-928CEBA5522F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CombatLogLogger", "CombatLogLogger\CombatLogLogger.csproj", "{FF25C6C3-4C3D-42DF-9C74-1F7A6150E0A7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CombatLogExporter", "CombatLogExporter\CombatLogExporter.csproj", "{FF25C6C3-4C3D-42DF-9C74-1F7A6150E0A7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B4C1CF00-C757-4503-9993-E8A2BC89848B}"
 	ProjectSection(SolutionItems) = preProject
-		License.txt = License.txt
+		LICENSE = LICENSE
 		README.MD = README.MD
 	EndProjectSection
 EndProject

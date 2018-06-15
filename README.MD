@@ -4,7 +4,7 @@ Collection of mods for Pillars of Eternity 2: Deadfire
 Uses the Patchwork framework (https://github.com/SonicZentropy/PoE2Mods.pw/releases) for patching the game assembly
 
 # Mods
-## Combat Log Logger
+## Combat Log Exporter
 A plug-in to write combat logs to the harddrive
 
 ## Smarter Unpause

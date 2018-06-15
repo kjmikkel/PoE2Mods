@@ -4,7 +4,7 @@ using Patchwork;
 using System.IO;
 using System.Text;
 
-namespace CombatLogLogger
+namespace CombatLogExporter
 {
     [NewType]
     public static class UserConfig

@@ -30,5 +30,5 @@ public class CombatLogLoggerPatchInfo : IPatchInfo
 
     public string PatchVersion => "1.0.0.000";
     public string Requirements => "None";
-    public string PatchName => "Combat Log Logger";
+    public string PatchName => "Combat Log Exporter";
 }

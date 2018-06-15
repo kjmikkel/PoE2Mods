@@ -7,8 +7,8 @@
     <ProjectGuid>{FF25C6C3-4C3D-42DF-9C74-1F7A6150E0A7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CombatLogLogger</RootNamespace>
-    <AssemblyName>CombatLogLogger.pw</AssemblyName>
+    <RootNamespace>CombatLogExporter</RootNamespace>
+    <AssemblyName>CombatLogExporter.pw</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -53,8 +53,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CombatLogLoggerImplementation.cs" />
-    <Compile Include="CombatLogLoggerPatchInfo.cs" />
+    <Compile Include="CombatLogExporterImplementation.cs" />
+    <Compile Include="CombatLogExporterPatchInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserConfig.cs" />
   </ItemGroup>
@@ -66,11 +66,12 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>SET ModName="CombatLogLogger"
+    <PostBuildEvent>SET ModName="CombatLogExporter"
 IF NOT EXIST $(TargetDir)%25ModName%25\Mods\%25ModName%25 mkdir $(TargetDir)%25ModName%25\Mods\%25ModName%25
 
 copy $(TargetDir)INIFileParser.dll $(TargetDir)%25ModName%25\Mods\%25ModName%25\.
 
+copy $(SourceDir)..\..\..\LICENSE $(TargetDir)\%25ModName%25\Mods\%25ModName%25\.
 copy $(TargetDir)%25ModName%25.pw.dll $(TargetDir)\%25ModName%25\Mods\%25ModName%25\.
 copy $(TargetDir)..\..\config.ini $(TargetDir)\%25ModName%25\Mods\%25ModName%25\.
 copy $(TargetDir)..\..\readme.txt $(TargetDir)\%25ModName%25\Mods\%25ModName%25\.

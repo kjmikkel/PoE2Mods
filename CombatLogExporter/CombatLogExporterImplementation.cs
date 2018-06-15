@@ -7,10 +7,10 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace CombatLogLogger
+namespace CombatLogExporter
 {
     [NewType]
-    public class CombatLogLoggerManager
+    public class CombatLogExporterManager
     {
         /// <summary>
         /// Are we in combat?
@@ -68,7 +68,7 @@ namespace CombatLogLogger
                     File.WriteAllText(dateTimeName, CombatLogStringBuilder.ToString());
                 } catch(Exception e)
                 {
-                    Game.Console.AddMessage($"Exception in Combat Log Logger: {e}");
+                    Game.Console.AddMessage($"Exception in Combat Log Exporter: {e}");
                 }
                 CombatLogStringBuilder = null;
             }
@@ -86,14 +86,14 @@ namespace CombatLogLogger
         public void Mod_OnCombatStart()
         {
             // We are now logging the combat information
-            CombatLogLoggerManager.InCombat = true;
-            CombatLogLoggerManager.CombatLogStringBuilder = new StringBuilder();
+            CombatLogExporterManager.InCombat = true;
+            CombatLogExporterManager.CombatLogStringBuilder = new StringBuilder();
             try
             {
-                if (!CombatLogLoggerManager.ConfigHasBeenInit)
+                if (!CombatLogExporterManager.ConfigHasBeenInit)
                 {
-                    UserConfig.LoadIniFile(Directory.GetCurrentDirectory(), "Mods", "CombatLogLogger", "config");
-                    var initialPath = UserConfig.GetValueAsString("CombatLogLogger", "saveLocation");
+                    UserConfig.LoadIniFile(Directory.GetCurrentDirectory(), "Mods", "CombatLogExporter", "config");
+                    var initialPath = UserConfig.GetValueAsString("CombatLogExporter", "saveLocation");
 
                     // Game.Console.AddMessage("Get values from config files");
                     // There is a default directory
@@ -101,26 +101,26 @@ namespace CombatLogLogger
                     {
                         // Game.Console.AddMessage("Default values:");
                         var seperator = Path.DirectorySeparatorChar;
-                        CombatLogLoggerManager.CombatLogWriteLocation = $"{Directory.GetCurrentDirectory()}{seperator}CombatLogs{seperator}";
+                        CombatLogExporterManager.CombatLogWriteLocation = $"{Directory.GetCurrentDirectory()}{seperator}CombatLogs{seperator}";
                     }
                     else
                     {
                         // Detect if this is a valid path
 
-                        CombatLogLoggerManager.CombatLogWriteLocation = initialPath;
+                        CombatLogExporterManager.CombatLogWriteLocation = initialPath;
                     }
 
-                    CombatLogLoggerManager.ExcludeWordList = new List<string>();
-                    if (!UserConfig.GetValueAsBool("CombatLogLogger", "includeAutoPause"))
+                    CombatLogExporterManager.ExcludeWordList = new List<string>();
+                    if (!UserConfig.GetValueAsBool("CombatLogExporter", "includeAutoPause"))
                     {
-                        CombatLogLoggerManager.ExcludeWordList.Add("Auto-Paused");
+                        CombatLogExporterManager.ExcludeWordList.Add("Auto-Paused");
                     }
 
-                    var extraExcludeWords = UserConfig.GetValueAsString("CombatLogLogger", "keywordsToExclude");
+                    var extraExcludeWords = UserConfig.GetValueAsString("CombatLogExporter", "keywordsToExclude");
                     if (extraExcludeWords != "None")
                     {
                         var excludeList = extraExcludeWords.Split(',');
-                        CombatLogLoggerManager.ExcludeWordList.AddRange(excludeList);
+                        CombatLogExporterManager.ExcludeWordList.AddRange(excludeList);
                     }
 
                     /*
@@ -132,23 +132,23 @@ namespace CombatLogLogger
                     // Game.Console.AddMessage($"We are trying to save to: {_combatLogWriteLocation}");
 
                     // Check if the directory exsits, and if, not create it
-                    if (!Directory.Exists(CombatLogLoggerManager.CombatLogWriteLocation))
+                    if (!Directory.Exists(CombatLogExporterManager.CombatLogWriteLocation))
                     {
-                        Directory.CreateDirectory(CombatLogLoggerManager.CombatLogWriteLocation);
+                        Directory.CreateDirectory(CombatLogExporterManager.CombatLogWriteLocation);
                         // Game.Console.AddMessage($"Creating a directory: {_combatLogWriteLocation}");
                     }
-                    CombatLogLoggerManager.Regex = new Regex(@"</?[^>]+>");
+                    CombatLogExporterManager.Regex = new Regex(@"</?[^>]+>");
 
                     // We are done setting everything up
-                    CombatLogLoggerManager.ConfigHasBeenInit = true;
+                    CombatLogExporterManager.ConfigHasBeenInit = true;
                 }
             }
             catch (Exception e)
             {
-                Game.Console.AddMessage($"Exception in Combat Log Logger: {e}");
+                Game.Console.AddMessage($"Exception in Combat Log Exporter: {e}");
             }
 
-            CombatLogLoggerManager.StartOfCombatTime = DateTime.Now;
+            CombatLogExporterManager.StartOfCombatTime = DateTime.Now;
 
             Ori_OnCombatStart();
         }
@@ -162,13 +162,13 @@ namespace CombatLogLogger
         {
             Ori_AddEntry(message);
 
-            if (CombatLogLoggerManager.InCombat)
+            if (CombatLogExporterManager.InCombat)
             {
-                var replaceValue = CombatLogLoggerManager.Regex.Replace(message.Message, "");
+                var replaceValue = CombatLogExporterManager.Regex.Replace(message.Message, "");
 
                 // Check whether we need to exclude the message
                 bool ignoreMessage = false;
-                foreach (var exclude in CombatLogLoggerManager.ExcludeWordList)
+                foreach (var exclude in CombatLogExporterManager.ExcludeWordList)
                 {
                     if (replaceValue.Contains(exclude))
                     {
@@ -178,7 +178,7 @@ namespace CombatLogLogger
                 }
 
                 // Actually append the value (if we are not to ignore it)
-                if (!ignoreMessage) CombatLogLoggerManager.CombatLogStringBuilder.Append($"{replaceValue}\n");
+                if (!ignoreMessage) CombatLogExporterManager.CombatLogStringBuilder.Append($"{replaceValue}\n");
             }
         }
 
@@ -190,7 +190,7 @@ namespace CombatLogLogger
         public void Mod_OnCombatEnd()
         {
             Ori_OnCombatEnd();
-            CombatLogLoggerManager.WriteLog();
+            CombatLogExporterManager.WriteLog();
         }
     }
 
@@ -207,7 +207,7 @@ namespace CombatLogLogger
         [ModifiesMember("DoGameOver")]
         public static void Mod_DoGameOver(float delay) {
             Ori_DoGameOver(delay);
-            CombatLogLoggerManager.WriteLog();
+            CombatLogExporterManager.WriteLog();
         }
     }
 }
