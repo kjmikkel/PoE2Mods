@@ -81,7 +81,7 @@ namespace CombatLogExporter
         /// <param name="message">The message that is to be added</param>
         public void AddMessage(ConsoleMessage message)
         {
-            if (InCombat)
+            if (InCombat && message.Mode == ConsoleState.Combat)
             {
                 String handledMessage = combatReporting.HandleMessage(message, configuration);
                 if (handledMessage != null)

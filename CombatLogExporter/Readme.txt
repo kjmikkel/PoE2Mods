@@ -1,4 +1,4 @@
-﻿Combat Log Exporter - 1.5
+﻿Combat Log Exporter - 1.5.0.1
 
 :: REQUIREMENTS ::
 • Deadfire at version 3.0.0.0021
