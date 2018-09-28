@@ -1,78 +1,116 @@
-﻿using Game;
+﻿using CombatLogExporter.Configuration;
+using CombatLogExporter.Reporting;
+using CombatLogExporter.Writer;
+using Game;
 using Game.UI;
 using Patchwork;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace CombatLogExporter
 {
     [NewType]
-    public class CombatLogExporterManager
+    class CombatLogExporterManager
     {
         /// <summary>
-        /// Are we in combat?
+        /// An instance of the CombatLogExporterManager for use in the singleton pattern
         /// </summary>
-        [NewMember]
-        public static bool InCombat = false;
+        private static CombatLogExporterManager _combatLogExporterManager = null;
+
+        /// <summary>
+        /// Writer for the log
+        /// </summary>
+        private static IWriter logWriter;
+
+        /// <summary>
+        /// The configuration instance
+        /// </summary>
+        private CombatConfiguration configuration;
+
+        /// <summary>
+        /// The instance used for the reporting of the combat
+        /// </summary>
+        private CombatReporting combatReporting;
+
+        /// <summary>
+        /// The constructor initializes the configuration, log writer and the instance that makes and formats the combat report 
+        /// </summary>
+        public CombatLogExporterManager()
+        {
+            configuration = new FileReaderConfiguration();
+            logWriter = new LogFileWriter();
+
+            if (configuration.TooltipReporting)
+            {
+                combatReporting = new TooltipReporting();
+            }
+            else
+            {
+                combatReporting = new BasicReporting();
+            }
+        }
+
+        /// <summary>
+        /// Get a singleton instance of this class
+        /// </summary>
+        public static CombatLogExporterManager Instance
+        {
+            get
+            {
+                if (_combatLogExporterManager == null)
+                {
+                    _combatLogExporterManager = new CombatLogExporterManager();
+                }
+                return _combatLogExporterManager;
+            }
+        }
 
         /// <summary>
         /// The string builder used to effectively build the combat log
         /// </summary>
-        [NewMember]
-        public static StringBuilder CombatLogStringBuilder;
+        private StringBuilder CombatLogStringBuilder;
 
         /// <summary>
-        /// Where on the Computer to write the combat logs
+        /// Are we in combat?
         /// </summary>
-        [NewMember]
-        public static string CombatLogWriteLocation;
+        private bool InCombat = false;
 
         /// <summary>
-        /// If any of these words are included in a message from combat system, exclude that line
+        /// Add a combat message to the stringbuilder
         /// </summary>
-        [NewMember]
-        public static List<string> ExcludeWordList;
+        /// <param name="message">The message that is to be added</param>
+        public void AddMessage(ConsoleMessage message)
+        {
+            if (InCombat)
+            {
+                String handledMessage = combatReporting.HandleMessage(message, configuration);
+                if (handledMessage != null)
+                {
+                    CombatLogStringBuilder.Append(handledMessage);
+                }
+            }
+        }
 
         /// <summary>
-        /// The time the combat started
+        /// The combat has started, so we begin registering the console messages
         /// </summary>
-        [NewMember]
-        public static DateTime StartOfCombatTime;
+        public void StartCombat()
+        {
+            // We are now logging the combat information
+            InCombat = true;
+            CombatLogStringBuilder = new StringBuilder();
+            configuration.StartOfCombatTime = DateTime.Now;
+        }
 
         /// <summary>
-        /// Have we gotten the configuration information yet?
+        /// The combat has ended, so we no longer register the combat messages, and we write the message
         /// </summary>
-        [NewMember]
-        public static bool ConfigHasBeenInit = false;
-
-        [NewMember]
-        public static Regex Regex;
-
-        [NewMember]
-        public static string MapName;
-
-        [NewMember]
-        public static void WriteLog()
+        public void EndCombat()
         {
             if (InCombat)
             {
                 InCombat = false;
-
-                // Write the combat log to a file
-                string dateTimeName = $"{CombatLogWriteLocation}{CombatLogExporterManager.MapName} - {StartOfCombatTime.ToString("yyyy-MM-dd HH-mm-ss")}.log";
-
-                // Game.Console.AddMessage($"Saving log to {dateTimeName}");
-
-                try
-                {
-                    File.WriteAllText(dateTimeName, CombatLogStringBuilder.ToString());
-                } catch(Exception e)
-                {
-                    Game.Console.AddMessage($"Exception in Combat Log Exporter: {e}");
-                }
+                logWriter.WriteLogs(CombatLogStringBuilder, configuration);
                 CombatLogStringBuilder = null;
             }
         }
@@ -83,119 +121,35 @@ namespace CombatLogExporter
     {
         [NewMember]
         [DuplicatesBody("OnCombatStart")]
-        public static void Ori_OnCombatStart() { }
+        public void orig_OnCombatStart() { }
 
         [ModifiesMember("OnCombatStart")]
-        public void Mod_OnCombatStart()
+        public void mod_OnCombatStart()
         {
-            // We are now logging the combat information
-            CombatLogExporterManager.InCombat = true;
-            CombatLogExporterManager.CombatLogStringBuilder = new StringBuilder();
-            try
-            {
-                if (!CombatLogExporterManager.ConfigHasBeenInit)
-                {
-                    UserConfig.LoadIniFile(Directory.GetCurrentDirectory(), "Mods", "CombatLogExporter", "config");
-                    var initialPath = UserConfig.GetValueAsString("CombatLogExporter", "saveLocation");
-
-                    // Game.Console.AddMessage("Get values from config files");
-                    // There is a default directory
-                    if (initialPath == "default")
-                    {
-                        // Game.Console.AddMessage("Default values:");
-                        var seperator = Path.DirectorySeparatorChar;
-                        CombatLogExporterManager.CombatLogWriteLocation = $"{Directory.GetCurrentDirectory()}{seperator}CombatLogs{seperator}";
-                    }
-                    else
-                    {
-                        // Detect if this is a valid path
-
-                        CombatLogExporterManager.CombatLogWriteLocation = initialPath;
-                    }
-
-                    CombatLogExporterManager.ExcludeWordList = new List<string>();
-                    if (!UserConfig.GetValueAsBool("CombatLogExporter", "includeAutoPause"))
-                    {
-                        CombatLogExporterManager.ExcludeWordList.Add("Auto-Paused");
-                    }
-
-                    var extraExcludeWords = UserConfig.GetValueAsString("CombatLogExporter", "keywordsToExclude");
-                    if (extraExcludeWords != "None")
-                    {
-                        var excludeList = extraExcludeWords.Split(',');
-                        CombatLogExporterManager.ExcludeWordList.AddRange(excludeList);
-                    }
-
-                    /*
-                    foreach (var exclude in _excludeWordList)
-                    {
-                        Game.Console.AddMessage($"Excluding: {exclude}");
-                    }
-                    */
-                    // Game.Console.AddMessage($"We are trying to save to: {_combatLogWriteLocation}");
-
-                    // Check if the directory exsits, and if, not create it
-                    if (!Directory.Exists(CombatLogExporterManager.CombatLogWriteLocation))
-                    {
-                        Directory.CreateDirectory(CombatLogExporterManager.CombatLogWriteLocation);
-                        // Game.Console.AddMessage($"Creating a directory: {_combatLogWriteLocation}");
-                    }
-                    CombatLogExporterManager.Regex = new Regex(@"</?[^>]+>");
-
-                    // We are done setting everything up
-                    CombatLogExporterManager.ConfigHasBeenInit = true;
-                }
-
-                CombatLogExporterManager.MapName = GameState.Instance.CurrentMap.GetDisplayName();
-            }
-            catch (Exception e)
-            {
-                Game.Console.AddMessage($"Exception in Combat Log Exporter: {e}");
-            }
-
-            CombatLogExporterManager.StartOfCombatTime = DateTime.Now;
-
-            Ori_OnCombatStart();
+            CombatLogExporterManager.Instance.StartCombat();
+            orig_OnCombatStart();
         }
 
         [NewMember]
         [DuplicatesBody("AddEntry")]
-        public void Ori_AddEntry(ConsoleMessage message) { }
+        public void orig_AddEntry(ConsoleMessage message) { }
 
         [ModifiesMember("AddEntry")]
-        public void Mod_AddEntry(ConsoleMessage message)
+        public void mod_AddEntry(ConsoleMessage message)
         {
-            Ori_AddEntry(message);
-
-            if (CombatLogExporterManager.InCombat)
-            {
-                var replaceValue = CombatLogExporterManager.Regex.Replace(message.Message, "");
-
-                // Check whether we need to exclude the message
-                bool ignoreMessage = false;
-                foreach (var exclude in CombatLogExporterManager.ExcludeWordList)
-                {
-                    if (replaceValue.Contains(exclude))
-                    {
-                        ignoreMessage = true;
-                        break;
-                    }
-                }
-
-                // Actually append the value (if we are not to ignore it)
-                if (!ignoreMessage) CombatLogExporterManager.CombatLogStringBuilder.Append($"{replaceValue}\n");
-            }
+            orig_AddEntry(message);
+            CombatLogExporterManager.Instance.AddMessage(message);
         }
 
         [NewMember]
         [DuplicatesBody("OnCombatEnd")]
-        public static void Ori_OnCombatEnd() { }
+        public void orig_OnCombatEnd() { }
 
         [ModifiesMember("OnCombatEnd")]
-        public void Mod_OnCombatEnd()
+        public void mod_OnCombatEnd()
         {
-            Ori_OnCombatEnd();
-            CombatLogExporterManager.WriteLog();
+            orig_OnCombatEnd();
+            CombatLogExporterManager.Instance.EndCombat();
         }
     }
 
@@ -203,16 +157,17 @@ namespace CombatLogExporter
     /// Take care of the case where combat ends because the party dies
     /// </summary>
     [ModifiesType]
-    public class Mod_GameState : GameState
+    class Mod_GameState : GameState
     {
         [NewMember]
         [DuplicatesBody("DoGameOver")]
-        public static void Ori_DoGameOver(float delay) { }
+        public static void orig_DoGameOver(float delay) { }
 
         [ModifiesMember("DoGameOver")]
-        public static void Mod_DoGameOver(float delay) {
-            Ori_DoGameOver(delay);
-            CombatLogExporterManager.WriteLog();
+        public static void mod_DoGameOver(float delay)
+        {
+            orig_DoGameOver(delay);
+            CombatLogExporterManager.Instance.EndCombat();
         }
     }
 }

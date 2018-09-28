@@ -12,8 +12,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B4C1CF00-C757-4503-9993-E8A2BC89848B}"
 	ProjectSection(SolutionItems) = preProject
 		LICENSE = LICENSE
+		OpenAssembly.bat = OpenAssembly.bat
 		README.MD = README.MD
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KickOutPartyMember", "KickOutPartyMember\KickOutPartyMember.csproj", "{20BBC4F8-46FA-4B28-B780-D5D342D976BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -131,6 +134,38 @@ Global
 		{FF25C6C3-4C3D-42DF-9C74-1F7A6150E0A7}.winphone_Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF25C6C3-4C3D-42DF-9C74-1F7A6150E0A7}.winphone_Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF25C6C3-4C3D-42DF-9C74-1F7A6150E0A7}.winphone_Release|Any CPU.Build.0 = Release|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.net_2_0_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.net_2_0_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.net_2_0_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.net_2_0_Release|Any CPU.Build.0 = Release|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.net_3_5_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.net_3_5_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.net_3_5_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.net_3_5_Release|Any CPU.Build.0 = Release|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.net_4_0_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.net_4_0_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.net_4_0_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.net_4_0_Release|Any CPU.Build.0 = Release|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.net_4_5_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.net_4_5_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.net_4_5_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.net_4_5_Release|Any CPU.Build.0 = Release|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.PrepareEnvironment|Any CPU.ActiveCfg = Release|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.PrepareEnvironment|Any CPU.Build.0 = Release|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.Publish|Any CPU.ActiveCfg = Release|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.Publish|Any CPU.Build.0 = Release|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.silverlight_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.silverlight_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.silverlight_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.silverlight_Release|Any CPU.Build.0 = Release|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.winphone_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.winphone_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.winphone_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20BBC4F8-46FA-4B28-B780-D5D342D976BA}.winphone_Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

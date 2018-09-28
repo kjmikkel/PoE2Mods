@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FF25C6C3-4C3D-42DF-9C74-1F7A6150E0A7}</ProjectGuid>
+    <ProjectGuid>{20BBC4F8-46FA-4B28-B780-D5D342D976BA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CombatLogExporter</RootNamespace>
-    <AssemblyName>CombatLogExporter.pw</AssemblyName>
+    <RootNamespace>KickOutPartyMember</RootNamespace>
+    <AssemblyName>KickOutPartyMember</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,12 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Assembly-CSharp">
       <HintPath>..\Packages\Assembly-CSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="INIFileParser">
-      <HintPath>..\..\PoE2Mods.pw\ini-parser-2.5.2\src\IniFileParser\bin\Debug\INIFileParser.dll</HintPath>
     </Reference>
     <Reference Include="Patchwork.Attributes">
       <HintPath>..\..\PoE2Mods.pw\Patchwork.Attributes\bin\Debug\Patchwork.Attributes.dll</HintPath>
@@ -54,29 +49,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CombatLogExporterImplementation.cs" />
-    <Compile Include="CombatLogExporterPatchInfo.cs" />
-    <Compile Include="Reporting\TooltipReporting.cs" />
-    <Compile Include="Reporting\CombatReporting.cs" />
-    <Compile Include="Configuration\CombatConfiguration.cs" />
-    <Compile Include="Configuration\FileReaderConfiguration.cs" />
+    <Compile Include="KickOutPartyMemberImplementation.cs" />
+    <Compile Include="KickOutPartyMemberPatchInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reporting\BasicReporting.cs" />
-    <Compile Include="UserConfig.cs" />
-    <Compile Include="Writer\IWriter.cs" />
-    <Compile Include="Writer\LogFileWriter.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="ChangeLog.txt" />
-    <Content Include="Readme.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="config.ini" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>SET ModName="CombatLogExporter"
+    <PostBuildEvent>SET ModName="KickOutPartyMember"
 IF NOT EXIST $(TargetDir)%25ModName%25\Mods\%25ModName%25 mkdir $(TargetDir)%25ModName%25\Mods\%25ModName%25
 
 copy $(TargetDir)INIFileParser.dll $(TargetDir)%25ModName%25\Mods\%25ModName%25\.
