@@ -1,7 +1,7 @@
-﻿Smarter Unpause - 1.0
+﻿Smarter Unpause - 1.0.0.1
 
 :: REQUIREMENTS ::
-• Deadfire at version 1.1.0.0035
+• Deadfire at version 3.0.0.0021
 • A version of the Patchwork modding framework for PoE2 which can be found here: https://github.com/SonicZentropy/PoE2Mods.pw/releases
 
 To run this you will need:
@@ -15,7 +15,7 @@ This mod makes the auto-pause smarter by having a grace period between the auto-
 Steam Achievements might be disabled by using this (but I am not sure), but you will still be able to earn Berath's Blessings points and GOG achievements.
 
 :: INSTALLATION ::
-Unzip the Mods folder and stick it in the ...\Pillars of Eternity II Deadfire\ directory.
+Unzip the Mods folder and put it in the ...\Pillars of Eternity II Deadfire\ directory.
     
 ::  CREDITS ::
 This is a lightly modified version of the PoE1 mod fo the same name by veyn (which can be found here https://www.nexusmods.com/pillarsofeternity/mods/185).
