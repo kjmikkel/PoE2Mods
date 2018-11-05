@@ -43,16 +43,6 @@ namespace CombatLogExporter.Configuration
         public Regex NumberLetterSpace;
 
         /// <summary>
-        /// The name of the map the party is in
-        /// </summary>
-        public string MapName;
-
-        /// <summary>
-        /// The time the combat started
-        /// </summary>
-        public DateTime StartOfCombatTime;
-
-        /// <summary>
         /// Report not only the basic combat information, but also the tooltip information
         /// </summary>
         public bool TooltipReporting;

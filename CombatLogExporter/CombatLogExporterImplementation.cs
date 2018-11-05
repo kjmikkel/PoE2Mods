@@ -28,6 +28,11 @@ namespace CombatLogExporter
         private CombatConfiguration configuration;
 
         /// <summary>
+        /// The information about the individual skirmish
+        /// </summary>
+        private SkirmishInformation skirmishInformation;
+
+        /// <summary>
         /// The instance used for the reporting of the combat
         /// </summary>
         private CombatReporting combatReporting;
@@ -99,7 +104,7 @@ namespace CombatLogExporter
             // We are now logging the combat information
             InCombat = true;
             CombatLogStringBuilder = new StringBuilder();
-            configuration.StartOfCombatTime = DateTime.Now;
+            skirmishInformation = new SkirmishInformation();
         }
 
         /// <summary>
@@ -110,7 +115,7 @@ namespace CombatLogExporter
             if (InCombat)
             {
                 InCombat = false;
-                logWriter.WriteLogs(CombatLogStringBuilder, configuration);
+                logWriter.WriteLogs(CombatLogStringBuilder, configuration, skirmishInformation);
                 CombatLogStringBuilder = null;
             }
         }

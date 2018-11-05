@@ -15,8 +15,8 @@ namespace CombatLogExporter.Configuration
             {
                 try
                 {
-                    UserConfig.LoadIniFile(Directory.GetCurrentDirectory(), "Mods", "CombatLogExporter", "config");
-                    var initialPath = UserConfig.GetValueAsString("CombatLogExporter", "saveLocation");
+                    UserConfig userConfig = new UserConfig(Directory.GetCurrentDirectory(), "Mods", "CombatLogExporter", "config");
+                    var initialPath = userConfig.GetValueAsString("CombatLogExporter", "saveLocation");
 
                     // There is a default directory
                     if (initialPath == "default")
@@ -32,12 +32,12 @@ namespace CombatLogExporter.Configuration
                     }
 
                     ExcludeWordList = new List<string>();
-                    if (!UserConfig.GetValueAsBool("CombatLogExporter", "includeAutoPause"))
+                    if (!userConfig.GetValueAsBool("CombatLogExporter", "includeAutoPause"))
                     {
                         ExcludeWordList.Add("Auto-Paused");
                     }
 
-                    var extraExcludeWords = UserConfig.GetValueAsString("CombatLogExporter", "keywordsToExclude");
+                    var extraExcludeWords = userConfig.GetValueAsString("CombatLogExporter", "keywordsToExclude");
                     if (extraExcludeWords != "None")
                     {
                         var excludeList = extraExcludeWords.Split(',');
@@ -45,8 +45,8 @@ namespace CombatLogExporter.Configuration
 
                     }
 
-                    TooltipReporting = UserConfig.GetValueAsBool("CombatLogExporter", "reportToolTip");
- 
+                    TooltipReporting = userConfig.GetValueAsBool("CombatLogExporter", "reportToolTip");
+
                     // Check if the directory exsits, and if, not create it
                     if (!Directory.Exists(CombatLogWriteLocation))
                     {
@@ -61,13 +61,13 @@ namespace CombatLogExporter.Configuration
 
                     // We are done setting everything up
                     ConfigHasBeenInit = true;
-                    MapName = GameState.Instance.CurrentMap.GetDisplayName();
-                } catch(Exception e)
+                }
+                catch (Exception e)
                 {
                     Game.Console.AddMessage($"Exception in Combat Log Exporter: {e}");
                 }
             }
-            
+
         }
     }
 }

@@ -2,6 +2,22 @@
 = Combat Log Exporter =
 =======================
 
+Release 1.5.0.4 (26/10 - 2018):
+-------------------------------
+Fixed an error that locked the map name part of the combat log names to the first map combat was started in for that game session
+
+Release 1.5.0.3 (12/10 - 2018):
+-------------------------------
+Maintenance release
+
+Release 1.5.0.2 (06/10 - 2018):
+-------------------------------
+Maintenance release
+
+Release 1.5.0.1 (29/05 - 2018):
+-------------------------------
+Only combat messages are now reported 
+
 Release 1.0.1.0 (15/06 - 2018):
 -------------------------------
 The exported combat log is now saved in the following format [Map Name] - [yyyy-MM-dd HH- mm-ss]

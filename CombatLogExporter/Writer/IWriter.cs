@@ -12,6 +12,6 @@ namespace CombatLogExporter.Writer
         /// <param name="stringsToWrite">The string that is to be written</param>
         /// <param name="configuration">The configuration for the combat log exporter</param>
         [NewMember]
-        void WriteLogs(StringBuilder stringsToWrite, CombatConfiguration configuration); 
+        void WriteLogs(StringBuilder stringsToWrite, CombatConfiguration configuration, SkirmishInformation skirmish); 
     }
 }

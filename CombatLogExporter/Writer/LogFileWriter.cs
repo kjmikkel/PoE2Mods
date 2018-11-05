@@ -13,10 +13,10 @@ namespace CombatLogExporter.Writer
         /// </summary>
         /// <param name="stringsToWrite">The string that is to be written</param>
         /// <param name="configuration">The configuration for the combat log exporter</param>
-        public void WriteLogs(StringBuilder stringsToWrite, CombatConfiguration configuration)
+        public void WriteLogs(StringBuilder stringsToWrite, CombatConfiguration configuration, SkirmishInformation skirmish)
         {
             // Write the combat log to a file
-            string dateTimeName = $"{configuration.CombatLogWriteLocation}{configuration.MapName} - {configuration.StartOfCombatTime.ToString("yyyy-MM-dd HH-mm-ss")}.log";
+            string dateTimeName = $"{configuration.CombatLogWriteLocation}{skirmish.MapName} - {skirmish.StartOfCombatTime}.log";
 
             try
             {
