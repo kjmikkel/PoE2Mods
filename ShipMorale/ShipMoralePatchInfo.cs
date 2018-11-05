@@ -5,9 +5,9 @@ using System.Linq;
 
 [assembly: PatchAssembly]
 [PatchInfo]
-class KickOutPartyMemberPatchInfo
+class ShipMoralePatchInfo : IPatchInfo
 {
-    public KickOutPartyMemberPatchInfo()
+    public ShipMoralePatchInfo()
     {
         // Left blank on purpose
     }
@@ -28,7 +28,7 @@ class KickOutPartyMemberPatchInfo
         return null;
     }
 
-    public string PatchVersion => "1.0.0.0";
+    public string PatchVersion => "1.0.0.000";
     public string Requirements => "None";
-    public string PatchName => "Kick Out Party Member Patch";
+    public string PatchName => "Ship Morale Patch";
 }

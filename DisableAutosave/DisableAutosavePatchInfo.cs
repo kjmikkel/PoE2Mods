@@ -5,9 +5,9 @@ using System.Linq;
 
 [assembly: PatchAssembly]
 [PatchInfo]
-class KickOutPartyMemberPatchInfo
+public class DisableAutosavePatchInfo : IPatchInfo
 {
-    public KickOutPartyMemberPatchInfo()
+    public DisableAutosavePatchInfo()
     {
         // Left blank on purpose
     }
@@ -30,5 +30,5 @@ class KickOutPartyMemberPatchInfo
 
     public string PatchVersion => "1.0.0.0";
     public string Requirements => "None";
-    public string PatchName => "Kick Out Party Member Patch";
+    public string PatchName => "Disable Autosave";
 }

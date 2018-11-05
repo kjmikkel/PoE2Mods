@@ -1,13 +1,13 @@
-﻿using Patchwork;
-using Patchwork.AutoPatching;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
+using Patchwork;
+using Patchwork.AutoPatching;
 
 [assembly: PatchAssembly]
 [PatchInfo]
-class KickOutPartyMemberPatchInfo
+public class CameraZoomPatchInfo : IPatchInfo
 {
-    public KickOutPartyMemberPatchInfo()
+    public CameraZoomPatchInfo()
     {
         // Left blank on purpose
     }
@@ -30,5 +30,5 @@ class KickOutPartyMemberPatchInfo
 
     public string PatchVersion => "1.0.0.0";
     public string Requirements => "None";
-    public string PatchName => "Kick Out Party Member Patch";
+    public string PatchName => "Camera Zoom";
 }

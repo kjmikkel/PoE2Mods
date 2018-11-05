@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{20BBC4F8-46FA-4B28-B780-D5D342D976BA}</ProjectGuid>
+    <ProjectGuid>{BA223B04-6210-4EEA-9CC3-B77D2E63C2EF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KickOutPartyMember</RootNamespace>
-    <AssemblyName>KickOutPartyMember.pw</AssemblyName>
+    <RootNamespace>DisableAutosave</RootNamespace>
+    <AssemblyName>DisableAutosave.pw</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,22 +46,26 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
-      <HintPath>..\..\PoE2Mods.pw\ReferenceFiles\UnityEngine.dll</HintPath>
+      <HintPath>D:\Program Files (x86)\GOG Galaxy\Games\Pillars of Eternity II Deadfire\PillarsOfEternityII_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="KickOutPartyMemberImplementation.cs" />
-    <Compile Include="KickOutPartyMemberPatchInfo.cs" />
+    <Compile Include="DisableAutosavePatchInfo.cs" />
+    <Compile Include="DisableAutosave.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ChangeLog.txt" />
+    <Content Include="Readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>SET ModName="KickOutPartyMember"
+    <PostBuildEvent>SET ModName="DisableAutosave"
 IF NOT EXIST $(TargetDir)%25ModName%25\Mods\%25ModName%25 mkdir $(TargetDir)%25ModName%25\Mods\%25ModName%25
 
-copy $(SourceDir)..\..\..\LICENSE $(TargetDir)\%25ModName%25\Mods\%25ModName%25\.
+copy $(SourceDir)..\..\..\SonicZentropyLicense.txt $(TargetDir)\%25ModName%25\Mods\%25ModName%25\LICENSE
 
-SET FILE_LIST=INIFileParser.dll ..\..\ChangeLog.txt %25ModName%25.pw.dll UserConfig.dll ..\..\config.ini ..\..\readme.txt
+SET FILE_LIST=INIFileParser.dll ..\..\ChangeLog.txt %25ModName%25.pw.dll ..\..\config.ini ..\..\readme.txt
 (for %25%25a in (%25FILE_LIST%25) do (
   copy $(TargetDir)%25%25a $(TargetDir)%25ModName%25\Mods\%25ModName%25\.
 ))
