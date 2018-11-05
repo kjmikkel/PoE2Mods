@@ -69,6 +69,9 @@ SET FILE_LIST=INIFileParser.dll ..\..\ChangeLog.txt %25ModName%25.pw.dll ..\..\c
 
 xcopy /s /Y $(TargetDir)%25ModName%25\Mods "D:\Program Files (x86)\GOG Galaxy\Games\Pillars of Eternity II Deadfire\Mods"
 if exist $(TargetDir)%25ModName%25.zip del $(TargetDir)%25ModName%25.zip
-izarcc -a -r -p -cx $(TargetDir)%25ModName%25.zip %25ModName%25\</PostBuildEvent>
+izarcc -a -r -p -cx $(TargetDir)%25ModName%25.zip %25ModName%25\
+
+IF NOT EXIST $(SourceDir)..\..\..\Result mkdir $(SourceDir)..\..\..\Result
+COPY $(TargetDir)%25ModName%25.zip $(SourceDir)..\..\..\Result\.</PostBuildEvent>
   </PropertyGroup>
 </Project>

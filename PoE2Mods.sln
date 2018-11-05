@@ -11,8 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CombatLogExporter", "Combat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B4C1CF00-C757-4503-9993-E8A2BC89848B}"
 	ProjectSection(SolutionItems) = preProject
+		GOG.bat = GOG.bat
 		OpenAssembly.bat = OpenAssembly.bat
 		README.MD = README.MD
+		Steam.bat = Steam.bat
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KickOutPartyMember", "KickOutPartyMember\KickOutPartyMember.csproj", "{20BBC4F8-46FA-4B28-B780-D5D342D976BA}"
