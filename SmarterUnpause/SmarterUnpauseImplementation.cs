@@ -48,8 +48,8 @@ namespace SmarterUnpause
         {
             if (!ConfigHasBeenInit)
             {
-                UserConfig.LoadIniFile(Directory.GetCurrentDirectory(), "Mods", "SmarterUnpause", "config");
-                PauseThreshold = UserConfig.GetValueAsFloat("SmarterUnpause", "pauseThreshold");
+                UserConfig userConfig = new UserConfig(Directory.GetCurrentDirectory(), "Mods", "SmarterUnpause", "config");
+                PauseThreshold = userConfig.GetValueAsFloat("SmarterUnpause", "pauseThreshold");
                 // Console.AddMessage($"The pause threshold is {PauseThreshold} seconds");
                 ConfigHasBeenInit = true;
             }

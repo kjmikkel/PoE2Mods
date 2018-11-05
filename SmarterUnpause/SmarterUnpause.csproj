@@ -36,18 +36,11 @@
     <Reference Include="Assembly-CSharp">
       <HintPath>..\Packages\Assembly-CSharp.dll</HintPath>
     </Reference>
-    <Reference Include="INIFileParser, Version=2.5.2.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\PoE2Mods.pw\ini-parser-2.5.2\src\IniFileParser\bin\Debug\INIFileParser.dll</HintPath>
+    <Reference Include="INIFileParser">
+      <HintPath>..\..\PoE2Mods.pw\ini-parser-2.5.2\src\IniFileParser\obj\Release\INIFileParser.dll</HintPath>
     </Reference>
     <Reference Include="Patchwork.Attributes">
       <HintPath>..\..\PoE2Mods.pw\Patchwork.Attributes\bin\Debug\Patchwork.Attributes.dll</HintPath>
-    </Reference>
-    <Reference Include="Patchwork.Engine">
-      <HintPath>..\..\PoE2Mods.pw\Patchwork.Engine\bin\Debug\Patchwork.Engine.dll</HintPath>
-    </Reference>
-    <Reference Include="PatchworkLauncher">
-      <HintPath>..\..\PoE2Mods.pw\PatchworkLauncher\bin\Debug\PatchworkLauncher.exe</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -75,9 +68,10 @@
   <PropertyGroup>
     <PostBuildEvent>SET ModName="SmarterUnpause"
 IF NOT EXIST $(TargetDir)%25ModName%25\Mods\%25ModName%25 mkdir $(TargetDir)%25ModName%25\Mods\%25ModName%25
+
 copy $(SourceDir)..\..\..\LICENSE $(TargetDir)\%25ModName%25\Mods\%25ModName%25\.
 
-SET FILE_LIST=INIFileParser.dll ..\..\ChangeLog.txt %25ModName%25.pw.dll ..\..\config.ini ..\..\readme.txt
+SET FILE_LIST=INIFileParser.dll ..\..\ChangeLog.txt %25ModName%25.pw.dll UserConfig.dll ..\..\config.ini ..\..\readme.txt
 (for %25%25a in (%25FILE_LIST%25) do (
   copy $(TargetDir)%25%25a $(TargetDir)%25ModName%25\Mods\%25ModName%25\.
 ))
