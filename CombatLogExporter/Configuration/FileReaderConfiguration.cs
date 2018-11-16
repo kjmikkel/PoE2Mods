@@ -51,7 +51,7 @@ namespace CombatLogExporter.Configuration
                     if (!Directory.Exists(CombatLogWriteLocation))
                     {
                         Directory.CreateDirectory(CombatLogWriteLocation);
-                        Game.Console.AddMessage($"Creating a directory: {CombatLogWriteLocation}");
+                        // Game.Console.AddMessage($"Creating a directory: {CombatLogWriteLocation}");
                     }
 
                     RemoveTagsRegex = new Regex(@"</?[^>]+>");

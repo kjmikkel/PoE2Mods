@@ -1,7 +1,7 @@
-﻿Ship Morale - 1.0.0.0
+﻿Ship Morale - 1.0.0.1
 
 :: REQUIREMENTS ::
-• Deadfire at version 3.1.0.0016
+• Deadfire at version 3.1.1.0024
 • A version of the Patchwork modding framework for PoE2 which can be found here: https://www.nexusmods.com/pillarsofeternity2/mods/231
 
 To run this you will need:
@@ -15,8 +15,14 @@ This mod disables all the autosave functionality.
 Steam Achievements might be disabled by using this (but I am not sure), but you will still be able to earn Berath's Blessings points and GOG achievements.
 
 :: INSTALLATION ::
-Unzip the Mods folder and put it in the ...\Pillars of Eternity II Deadfire\ directory.
-    
+Unzip the Mods folder and put it in the 
+...\Pillars of Eternity II Deadfire\ directory for the GOG version
+...\Pillars of Eternity II\ directory for the Steam version
+
+Copy the file INIFileParser.dll to the 
+...\Pillars of Eternity II Deadfire\PillarsOfEternityII_Data\Managed\ directory for the GOG version
+...\Pillars of Eternity II Deadfire\PillarsOfEternityII_Data\Managed\ directory for the Steam version    
+
 ::  CREDITS ::
 This is a maintained version of a mod made by SonicZentropy (and its original source can be found here: https://github.com/SonicZentropy/PoE2Mods.pw).
 

@@ -2,6 +2,10 @@
 = Smarter Unpause =
 ===================
 
+Release 1.0.0.5 (09/11 - 2018)
+------------------------------
+Maintenance release
+
 Release 1.0.0.4 (26/10 - 2018)
 ------------------------------
 Maintenance release
