@@ -1,7 +1,7 @@
-﻿Smarter Unpause - 1.0.0.5
+﻿Smarter Unpause - 1.0.0.6
 
 :: REQUIREMENTS ::
-• Deadfire at version 3.1.1.0024
+• GOG version at 3.1.1.0024 and Steam at 3.1.1.0023
 • A version of the Patchwork modding framework for PoE2 which can be found here: https://www.nexusmods.com/pillarsofeternity2/mods/231
 
 To run this you will need:
