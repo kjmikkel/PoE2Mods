@@ -1,7 +1,7 @@
-﻿Disable Autosave - 1.0.0.2
+﻿Disable Autosave - 1.0.0.3
 
 :: REQUIREMENTS ::
-• GOG version at 3.1.1.0024 and Steam at 3.1.1.0023
+• GOG version at 4.0.1.0041 and Steam at 4.0.1.0041
 • A version of the Patchwork modding framework for PoE2 which can be found here: https://www.nexusmods.com/pillarsofeternity2/mods/231
 
 To run this you will need:

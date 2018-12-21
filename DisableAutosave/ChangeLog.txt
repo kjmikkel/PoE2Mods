@@ -2,6 +2,10 @@
 = Disable Autosave =
 ====================
 
+Release 1.0.0.3 (21/12 - 2018)
+-------------------------------
+Maintenance release
+
 Release 1.0.0.2 (04/12 - 2018)
 -------------------------------
 Maintenance release
