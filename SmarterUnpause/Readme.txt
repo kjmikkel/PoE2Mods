@@ -1,7 +1,7 @@
 ﻿Smarter Unpause - 1.0.0.7
 
 :: REQUIREMENTS ::
-• GOG version at 4.0.1.0041 and Steam at 4.0.1.0041
+• GOG version at 4.0.1.0041 and Steam at 4.0.1.0044
 • A version of the Patchwork modding framework for PoE2 which can be found here: https://www.nexusmods.com/pillarsofeternity2/mods/231
 
 To run this you will need:
