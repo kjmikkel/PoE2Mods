@@ -1,15 +1,14 @@
 ﻿using Game.UI;
 using Patchwork;
-using System;
 using UnityEngine;
 
 namespace KickOutPartyMember
 {
     [ModifiesType]
-    class KickOutPartyMember_UIPartyManager : UIPartyManager
+    internal class KickOutPartyMember_UIPartyManager : UIPartyManager
     {
         [NewMember]
-        UIMultiSpriteImageButton TestButton;
+        private readonly UIMultiSpriteImageButton TestButton;
 
         [DuplicatesBody("OnyxStart")]
         public void KickOutPartyMember_Orig_OnyxStart() { }
@@ -19,7 +18,7 @@ namespace KickOutPartyMember
         {
             KickOutPartyMember_Orig_OnyxStart();
             UIMultiSpriteImageButton testButton = TestButton;
-            testButton.onClick = (UIEventListener.VoidDelegate)Delegate.Combine(testButton.onClick, new UIEventListener.VoidDelegate(ButtonPressed));
+            // testButton.onClick = (UIEventListener.VoidDelegate)Delegate.Combine(testButton.onClick, new UIEventListener.VoidDelegate(ButtonPressed));
         }
 
         [NewMember]

@@ -18,7 +18,7 @@ public class SmarterUnpausePatchInfo : IPatchInfo
     }
 
     public FileInfo GetTargetFile(AppInfo app)
-    {
+    { 
         var file = Combine(app.BaseDirectory.FullName, "PillarsOfEternityII_Data", "Managed", "Assembly-CSharp.dll");
         return new FileInfo(file);
     }

@@ -32,14 +32,15 @@ namespace PoEGameInfo
             }
             var exeFile = fileInfos[0];
 
-            return new AppInfo()
+            AppInfo appInfo = new AppInfo()
             {
                 BaseDirectory = folderInfo,
                 Executable = exeFile,
                 AppVersion = appVersion,
                 AppName = "Pillars of Eternity: Deadfire",
                 IconLocation = new FileInfo(Path.Combine(folderInfo.FullName, iconFile)),
-                IgnorePEVerifyErrors = new[] {
+            };
+            AppInfo.IgnorePEVerifyErrors = new[] {
 					//Expected an ObjRef on the stack.(Error: 0x8013185E). 
 					//-you can ignore the following. They are present in the original DLL. I'm not sure if they are actually errors.
 					0x8013185EL,
@@ -50,9 +51,8 @@ namespace PoEGameInfo
 					//-this is a *verificaiton* issue is caused by copying the code from an existing constructor to a non-constructor method 
 					//-it contains a call to .ctor(), which is illegal from a non-constructor method.
 					//-There will be an option to fix this at some point, but it's not really an error.
-					0x801318BF,
-                }
-            };
+					0x801318BF };
+            return appInfo;
         }
     }
 }

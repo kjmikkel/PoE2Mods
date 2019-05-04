@@ -2,6 +2,10 @@
 = Combat Log Exporter =
 =======================
 
+Release 1.5.0.8 (23/03 - 2018):
+-------------------------------
+Maintenance release
+
 Release 1.5.0.7 (21/12 - 2018):
 -------------------------------
 Maintenance release
