@@ -40,6 +40,10 @@ TestResult.xml
 [Rr]eleasePS/
 dlldata.c
 
+# Don't include release folder
+GOG
+Steam
+
 # DNX
 project.lock.json
 artifacts/
