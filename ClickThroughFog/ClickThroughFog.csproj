@@ -26,7 +26,8 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -55,23 +56,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WorldMapPlayer.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="ChangeLog.txt" />
+    <Content Include="Readme.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>SET ModName="ClickThroughFog"
-IF NOT EXIST $(TargetDir)%25ModName%25\Mods\%25ModName%25 mkdir $(TargetDir)%25ModName%25\Mods\%25ModName%25
-
-copy $(SourceDir)..\..\..\SonicZentropyLicense.txt $(TargetDir)\%25ModName%25\Mods\%25ModName%25\LICENSE
-
-SET FILE_LIST=INIFileParser.dll ..\..\ChangeLog.txt %25ModName%25.pw.dll ..\..\config.ini ..\..\readme.txt
-(for %25%25a in (%25FILE_LIST%25) do (
-  copy $(TargetDir)%25%25a $(TargetDir)%25ModName%25\Mods\%25ModName%25\.
-))
-
-xcopy /s /Y $(TargetDir)%25ModName%25\Mods "D:\Program Files (x86)\GOG Galaxy\Games\Pillars of Eternity II Deadfire\Mods"
-if exist $(TargetDir)%25ModName%25.zip del $(TargetDir)%25ModName%25.zip
-izarcc -a -r -p -cx $(TargetDir)%25ModName%25.zip %25ModName%25\
-
-IF NOT EXIST $(SourceDir)..\..\..\Result mkdir $(SourceDir)..\..\..\Result
-COPY $(TargetDir)%25ModName%25.zip $(SourceDir)..\..\..\Result\.</PostBuildEvent>
+    <PostBuildEvent>SET ProjectDir=$(ProjectDir)
+SET TargetDir=$(TargetDir)
+python $(ProjectDir)..\post_build.py %25ProjectDir%25 %25TargetDir%25 ClickThroughFog ..\..\ChangeLog.txt ..\..\readme.txt ..\..\..\SonicZentropyLicense.txt</PostBuildEvent>
   </PropertyGroup>
 </Project>
