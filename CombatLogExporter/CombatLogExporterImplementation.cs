@@ -3,13 +3,108 @@ using CombatLogExporter.Reporting;
 using CombatLogExporter.Writer;
 using Game;
 using Game.UI;
-using Patchwork;
+using Harmony12;
 using System;
+using System.Reflection;
 using System.Text;
+using UnityModManagerNet;
 
 namespace CombatLogExporter
 {
-    [NewType]
+#if DEBUG
+    [EnableReloading]
+#endif
+    static class Main
+    {
+        public static bool enabled;
+        public static UnityModManager.ModEntry mod;
+        public static Settings settings;
+
+        static bool Load(UnityModManager.ModEntry modEntry)
+        {
+            try
+            {
+                HarmonyInstance instance = HarmonyInstance.Create(modEntry.Info.Id);
+                instance.PatchAll(Assembly.GetExecutingAssembly());
+
+                settings = Settings.Load<Settings>(modEntry);
+
+                // Set the default save location as a human readable path
+                InteractiveConfiguration config = new InteractiveConfiguration(settings);
+                settings.saveLocation = config.CombatLogWriteLocation;
+
+                mod = modEntry;
+                enabled = modEntry.Enabled;
+                modEntry.OnToggle = OnToggle;
+                modEntry.OnGUI = OnGUI;
+                modEntry.OnSaveGUI = OnSaveGUI;
+
+#if DEBUG
+                modEntry.OnUnload = Unload;
+#endif
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+            }
+
+            return true;
+        }
+
+        static void OnGUI(UnityModManager.ModEntry modEntry)
+        {
+            // GUIHelper.Toggle(ref settings.includeAutoPause, "Include Autopause", "Include the autopause messages in the exported combat log");
+            GUIHelper.Label("Directory to store the combat logs:");
+            GUIHelper.TextField(ref settings.saveLocation);
+
+            GUIHelper.Label("Key words to exlucde (comma seperated):");
+            GUIHelper.TextField(ref settings.keywordsToExclude);
+
+            GUIHelper.Toggle(ref settings.reportToolTip, "Store tooptips in the combat log", string.Empty);
+            GUIHelper.Toggle(ref settings.includeAutoPause, "Include autopause in the combat log", string.Empty);
+        }
+
+        static void OnSaveGUI(UnityModManager.ModEntry modEntry)
+        {
+            settings.Save(modEntry);
+        }
+
+        static bool OnToggle(UnityModManager.ModEntry modEntry, bool value)
+        {
+            enabled = modEntry.Enabled;
+            return true;
+        }
+
+#if DEBUG
+        static bool Unload(UnityModManager.ModEntry modEntry)
+        {
+            HarmonyInstance instance = HarmonyInstance.Create(modEntry.Info.Id);
+            instance.UnpatchAll();
+            return true;
+        }
+#endif
+
+        public static void Log(string logValue)
+        {
+            mod?.Logger.Log(logValue);
+        }
+
+        public static void LogError(Exception ex)
+        {
+            Log($"{ex.Message}\n{ex.StackTrace}");
+        }
+
+#if DEBUG
+        public static void LogState(bool? inCombat, string logValue)
+        {
+            if (inCombat != null)
+                Log($"Msg: {logValue}, Enabled: {Main.enabled}, In combat: {inCombat}");
+            else
+                Log($"Msg: {logValue}, Enabled: {Main.enabled}");
+        }
+#endif
+    }
+
     class CombatLogExporterManager
     {
         /// <summary>
@@ -21,11 +116,6 @@ namespace CombatLogExporter
         /// Writer for the log
         /// </summary>
         private static IWriter logWriter;
-
-        /// <summary>
-        /// The configuration instance
-        /// </summary>
-        private CombatConfiguration configuration;
 
         /// <summary>
         /// The information about the individual skirmish
@@ -42,10 +132,9 @@ namespace CombatLogExporter
         /// </summary>
         public CombatLogExporterManager()
         {
-            configuration = new FileReaderConfiguration();
             logWriter = new LogFileWriter();
 
-            if (configuration.TooltipReporting)
+            if (Main.settings.reportToolTip)
             {
                 combatReporting = new TooltipReporting();
             }
@@ -86,13 +175,20 @@ namespace CombatLogExporter
         /// <param name="message">The message that is to be added</param>
         public void AddMessage(ConsoleMessage message)
         {
-            if (InCombat && message.Mode == ConsoleState.Combat)
+            try
             {
-                String handledMessage = combatReporting.HandleMessage(message, configuration);
-                if (handledMessage != null)
+                if (Main.enabled && InCombat && message.Mode == ConsoleState.Combat)
                 {
-                    CombatLogStringBuilder.Append(handledMessage);
+                    String handledMessage = combatReporting.HandleMessage(message, Main.settings.Configuration);
+                    if (!string.IsNullOrEmpty(handledMessage))
+                    {
+                        CombatLogStringBuilder.Append(handledMessage);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Main.LogError(ex);
             }
         }
 
@@ -101,10 +197,20 @@ namespace CombatLogExporter
         /// </summary>
         public void StartCombat()
         {
-            // We are now logging the combat information
-            InCombat = true;
-            CombatLogStringBuilder = new StringBuilder();
-            skirmishInformation = new SkirmishInformation();
+            try
+            {
+                if (Main.enabled && !InCombat)
+                {   
+                    // We are now logging the combat information
+                    InCombat = true;
+                    CombatLogStringBuilder = new StringBuilder();
+                    skirmishInformation = new SkirmishInformation();
+                }
+            }
+            catch (Exception ex)
+            {
+                Main.LogError(ex);
+            }
         }
 
         /// <summary>
@@ -112,66 +218,64 @@ namespace CombatLogExporter
         /// </summary>
         public void EndCombat()
         {
-            if (InCombat)
+            try
             {
-                InCombat = false;
-                logWriter.WriteLogs(CombatLogStringBuilder, configuration, skirmishInformation);
-                CombatLogStringBuilder = null;
+                if (Main.enabled && InCombat)
+                {
+                    InCombat = false;
+                    logWriter.WriteLogs(CombatLogStringBuilder, Main.settings.Configuration, skirmishInformation);
+                    CombatLogStringBuilder = null;
+                }
             }
+            catch (Exception ex)
+            {
+                Main.LogError(ex);
+            }
+
         }
     }
 
-    [ModifiesType]
-    public class Mod_UIConsole : UIConsole
+    [HarmonyPatch(typeof(UIConsole), "AddEntry", MethodType.Normal)]
+    static class Postfix_AddEntry
     {
-        [NewMember]
-        [DuplicatesBody("OnCombatStart")]
-        public void orig_OnCombatStart() { }
-
-        [ModifiesMember("OnCombatStart")]
-        public void mod_OnCombatStart()
+        static void Postfix(ConsoleMessage message)
         {
-            CombatLogExporterManager.Instance.StartCombat();
-            orig_OnCombatStart();
-        }
-
-        [NewMember]
-        [DuplicatesBody("AddEntry")]
-        public void orig_AddEntry(ConsoleMessage message) { }
-
-        [ModifiesMember("AddEntry")]
-        public void mod_AddEntry(ConsoleMessage message)
-        {
-            orig_AddEntry(message);
             CombatLogExporterManager.Instance.AddMessage(message);
         }
+    }
 
-        [NewMember]
-        [DuplicatesBody("OnCombatEnd")]
-        public void orig_OnCombatEnd() { }
-
-        [ModifiesMember("OnCombatEnd")]
-        public void mod_OnCombatEnd()
+    [HarmonyPatch(typeof(UIConsole), "OnCombatStart", MethodType.Normal)]
+    static class Prefix_OnCombatStart
+    {
+        static void Prefix()
         {
-            orig_OnCombatEnd();
+            CombatLogExporterManager.Instance.StartCombat();
+        }
+    }
+
+    [HarmonyPatch(typeof(UIConsole), "OnCombatEnd", MethodType.Normal)]
+    static class Postfix_OnCombatEnd
+    {
+        static void Postfix()
+        {
             CombatLogExporterManager.Instance.EndCombat();
         }
     }
 
-    /// <summary>
-    /// Take care of the case where combat ends because the party dies
-    /// </summary>
-    [ModifiesType]
-    class Mod_GameState : GameState
+    [HarmonyPatch(typeof(GameState), "DoGameOver", new Type[] { })]
+    static class Postfix_DoGameOver_One
     {
-        [NewMember]
-        [DuplicatesBody("DoGameOver")]
-        public static void orig_DoGameOver(float delay) { }
-
-        [ModifiesMember("DoGameOver")]
-        public static void mod_DoGameOver(float delay)
+        static void Postfix()
         {
-            orig_DoGameOver(delay);
+            CombatLogExporterManager.Instance.EndCombat();
+        }
+    }
+
+    [HarmonyPatch(typeof(GameState), "DoGameOver", new Type[] { typeof(float) })]
+    static class Postfix_DoGameOver_Two
+    {
+        static void Postfix(float delay)
+        {
             CombatLogExporterManager.Instance.EndCombat();
         }
     }

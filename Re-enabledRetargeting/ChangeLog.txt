@@ -2,6 +2,10 @@
 = Re-enabled Retargeting =
 ==========================
 
+Release 1.0.0.1 (09/05 - 2020):
+-------------------------------
+Maintenance release
+
 Release 1.0.0.0 (29/05 - 2019):
 -------------------------------
 Initial release

@@ -1,70 +1,153 @@
 ﻿using Game;
-using Patchwork;
-using System.IO;
-using UnityEngine;
+using Harmony12;
+using System;
+using System.Reflection;
+using UnityModManagerNet;
+
 namespace SmarterUnpause
 {
-    // remember time of the last autopause
-    [NewType]
-    public class SmarterUnpauseManager
+#if DEBUG
+    [EnableReloading]
+#endif
+    static class Main
     {
-        [NewMember]
-        public static float AutoPauseTime = 0.0f;
+        public static bool enabled;
+        public static UnityModManager.ModEntry mod;
+        public static Settings settings;
+
+        static bool Load(UnityModManager.ModEntry modEntry)
+        {
+            try
+            {
+                HarmonyInstance instance = HarmonyInstance.Create(modEntry.Info.Id);
+                instance.PatchAll(Assembly.GetExecutingAssembly());
+
+                settings = Settings.Load<Settings>(modEntry);
+
+                mod = modEntry;
+                enabled = modEntry.Enabled;
+                modEntry.OnToggle = OnToggle;
+                modEntry.OnGUI = OnGUI;
+#if DEBUG
+                modEntry.OnUnload = Unload;
+#endif
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+            }
+
+            return true;
+        }
+
+        static bool OnToggle(UnityModManager.ModEntry modEntry, bool value)
+        {
+            enabled = modEntry.Enabled;
+#if DEBUG
+            Main.Log("Enabled set to: " + enabled);
+#endif
+            return true;
+        }
+
+        static void OnGUI(UnityModManager.ModEntry modEntry)
+        {
+            settings.Draw(modEntry);
+        }
+
+#if DEBUG
+        static bool Unload(UnityModManager.ModEntry modEntry)
+        {
+            HarmonyInstance instance = HarmonyInstance.Create(modEntry.Info.Id);
+            instance.UnpatchAll();
+            return true;
+        }
+#endif
+
+        public static void Log(string logValue)
+        {
+            mod?.Logger.Log(logValue);
+        }
+
+        public static void LogError(Exception ex)
+        {
+            Log($"{ex.Message}\n{ex.StackTrace}");
+        }
     }
 
-    [ModifiesType]
-    public class Mod_GameState : GameState
+    // remember time of the last autopause
+    public static class SmarterUnpauseManager
     {
-        [NewMember]
-        [DuplicatesBody("AutoPause")]
-        public static void Ori_AutoPause(AutoPauseOptions.PauseEvent evt, GameObject target, GameObject triggerer, GenericAbility ability = null) { }
+        public static float AutoPauseTime = 0.0f;
+        public static bool WasPaused = false;
+    }
 
-        [ModifiesMember("AutoPause")]
-        public static void Mod_AutoPause(AutoPauseOptions.PauseEvent evt, GameObject target, GameObject triggerer, GenericAbility ability = null)
+    [HarmonyPatch(typeof(GameState), "AutoPause", MethodType.Normal)]
+    static class AutoPause_New_Prefix
+    {
+        static void Prefix()
         {
-            bool wasPaused = TimeController.Instance.IsSafePaused;
-            Ori_AutoPause(evt, target, triggerer, ability);
-            if (!wasPaused && TimeController.Instance.IsSafePaused)
+            try
             {
-                // auto-pause happened; remember real time
-                SmarterUnpauseManager.AutoPauseTime = TimeController.Instance.RealtimeSinceStartupThisFrame;
-                // Console.AddMessage($"Auto-pausing at: {SmarterUnpauseManager.AutoPauseTime}");
+                if (Main.enabled)
+                {
+                    SmarterUnpauseManager.WasPaused = TimeController.Instance.IsSafePaused;
+                }
+            }
+            catch (Exception ex)
+            {
+                Main.LogError(ex);
             }
         }
     }
 
-    [ModifiesType]
-    public class Mod_UIActionBarOnClick : Game.UI.UIActionBarOnClick
+    [HarmonyPatch(typeof(GameState), "AutoPause", MethodType.Normal)]
+    static class AutoPause_New_Postfix
     {
-        // Has we initialized the configuration system
-        [NewMember]
-        private bool ConfigHasBeenInit;
-
-        [NewMember]
-        private float PauseThreshold;
-
-        [ModifiesMember]
-        private new void HandlePause()
+        static void Postfix()
         {
-            if (!ConfigHasBeenInit)
+            try
             {
-                UserConfig userConfig = new UserConfig(Directory.GetCurrentDirectory(), "Mods", "SmarterUnpause", "config");
-                PauseThreshold = userConfig.GetValueAsFloat("SmarterUnpause", "pauseThreshold");
-                // Console.AddMessage($"The pause threshold is {PauseThreshold} seconds");
-                ConfigHasBeenInit = true;
+                if (Main.enabled && !SmarterUnpauseManager.WasPaused && TimeController.Instance.IsSafePaused)
+                {
+                    // auto-pause happened; remember real time
+                    SmarterUnpauseManager.AutoPauseTime = TimeController.Instance.RealtimeSinceStartupThisFrame;
+                }
+            }
+            catch (Exception ex)
+            {
+                Main.LogError(ex);
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(Game.UI.UIActionBarOnClick), "HandlePause", MethodType.Normal)]
+    static class UIActionBarOnClick_New
+    {
+        static bool Prefix()
+        {
+            try
+            {
+                if (Main.enabled)
+                {
+                    float timeSinceAutoPause = TimeController.Instance.RealtimeSinceStartupThisFrame - SmarterUnpauseManager.AutoPauseTime;
+
+                    if (TimeController.Instance.IsSafePaused && timeSinceAutoPause < Main.settings.MillisecondsAsFloat)
+                        // if user presses unpause again, it should not be suppressed
+                        SmarterUnpauseManager.AutoPauseTime = 0.0f;
+                    else
+                        // Unpause
+                        TimeController.Instance.IsSafePaused = !TimeController.Instance.IsSafePaused;
+
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Main.LogError(ex);
+                return true;
             }
 
-            // Console.AddMessage($"Pausing: {!TimeController.Instance.IsPaused} at {TimeController.Instance.RealtimeSinceStartupThisFrame}");
-            float timeSinceAutopause = TimeController.Instance.RealtimeSinceStartupThisFrame - SmarterUnpauseManager.AutoPauseTime;
-            if (TimeController.Instance.IsSafePaused && timeSinceAutopause < PauseThreshold)
-            {
-                // Console.AddMessage($"Keeping the game paused, since autopause happened {timeSinceAutopause} seconds ago.");
-                SmarterUnpauseManager.AutoPauseTime = 0.0f; // if user presses unpause again, it should not be suppressed
-            }
-            else
-            {
-                TimeController.Instance.IsSafePaused = !TimeController.Instance.IsSafePaused;
-            }
+            return true;
         }
     }
 }

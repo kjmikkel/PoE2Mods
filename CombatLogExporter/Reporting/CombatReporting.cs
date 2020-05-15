@@ -1,12 +1,10 @@
 ﻿using CombatLogExporter.Configuration;
 using Game;
-using Patchwork;
 using System;
 using System.Text.RegularExpressions;
 
 namespace CombatLogExporter.Reporting
 {
-    [NewType]
     public abstract class CombatReporting
     {
         /// <summary>
@@ -30,7 +28,6 @@ namespace CombatLogExporter.Reporting
                 messageAsString = configuration.FullSpriteRegex.Replace(messageAsString, " " + uppername, 1, 0);
             }
 
-
             // Remove all the color information
             messageAsString = configuration.RemoveTagsRegex.Replace(messageAsString, "");
 
@@ -50,7 +47,7 @@ namespace CombatLogExporter.Reporting
             // Check whether we need to exclude the message
             bool ignoreMessage = false;
 
-            foreach (var exclude in configuration.ExcludeWordList)
+            foreach (string exclude in configuration.ExcludeWordList)
             {
                 if (messageAsString.Contains(exclude))
                 {

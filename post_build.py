@@ -20,15 +20,15 @@ Project = args.Project[0]
 Target = args.Target[0]
 ModName = args.ModName[0]
 Files = args.Files
-Files.append("%s.pw.dll" % ModName)
+Files.append("%s.dll" % ModName)
 
-make_folder = "%s%s\Mods\%s" % (Target, ModName, ModName)
+make_folder = "%s%s\%s" % (Target, ModName, ModName)
 make_folder_if_not_exist(make_folder)
 
 for mod_file in Files:
   from_path = "%s%s" % (Target, mod_file)
   print(from_path)
-  to_path = "%s%s\Mods\%s\." % (Target, ModName, ModName)
+  to_path = "%s%s\%s\." % (Target, ModName, ModName)
   shutil.copy(from_path, to_path)
 
 mod_folder = "%s%s" % (Target, ModName)

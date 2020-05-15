@@ -2,10 +2,8 @@
 using System.IO;
 using System.Text;
 using CombatLogExporter.Configuration;
-using Patchwork;
 namespace CombatLogExporter.Writer
 {
-    [NewType]
     class LogFileWriter : IWriter
     {
         /// <summary>
@@ -28,5 +26,5 @@ namespace CombatLogExporter.Writer
             }
         }
     }
-    
+
 }

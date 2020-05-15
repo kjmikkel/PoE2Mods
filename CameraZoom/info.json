@@ -1,0 +1,10 @@
+{
+  "Id": "CameraZoom",
+  "DisplayName": "Camera Zoom",
+  "Author": "silentStatic",
+  "Version": "1.0.0",
+  "ManagerVersion": "0.21.7.0",
+  "GameVersion": "5.0.0040",
+  "AssemblyName": "CameraZoom.dll",
+  "EntryMethod": "CameraZoom.Main.Load"
+}

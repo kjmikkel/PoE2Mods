@@ -1,7 +1,7 @@
-﻿Ship Morale - 1.0.0.3
+﻿Ship Morale - 1.0.0.5
 
 :: REQUIREMENTS ::
-• GOG version at 4.1.2.0047 and Steam at 4.1.2.0047
+• GOG version at 5.0.0.0040 and Steam at 5.0.0.0040
 • A version of the Patchwork modding framework for PoE2 which can be found here: https://www.nexusmods.com/pillarsofeternity2/mods/231
 
 To run this you will need:

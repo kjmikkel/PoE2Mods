@@ -1,4 +1,4 @@
-﻿Re-enabled Retargeting - 1.0.0.0
+﻿Re-enabled Retargeting - 1.0.0.1
 
 :: Requirements ::
 • GOG version at 5.0.0.0040 and Steam at 5.0.0.0040

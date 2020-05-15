@@ -2,6 +2,10 @@
 = Ship Morale =
 ===============
 
+Release 1.0.0.5 (09/05 - 2020)
+------------------------------
+Maintenance release
+
 Release 1.0.0.4 (23/03 - 2019)
 ------------------------------
 Maintenance release

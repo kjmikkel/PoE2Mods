@@ -1,10 +1,8 @@
 ﻿using CombatLogExporter.Configuration;
 using Game;
-using Patchwork;
 
 namespace CombatLogExporter.Reporting
 {
-    [NewType]
     class BasicReporting : CombatReporting
     {
         /// <summary>

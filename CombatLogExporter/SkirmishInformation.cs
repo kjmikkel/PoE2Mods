@@ -1,5 +1,4 @@
 ﻿using Game;
-using Patchwork;
 using System;
 
 namespace CombatLogExporter.Configuration
@@ -7,7 +6,6 @@ namespace CombatLogExporter.Configuration
     /// <summary>
     /// Skirmish information contains the basic information about a single skirmish - the map name and the time the combat started
     /// </summary>
-    [NewType]
     public class SkirmishInformation
     {
         /// <summary>

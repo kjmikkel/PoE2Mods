@@ -1,70 +1,151 @@
 ﻿using Game;
-using Patchwork;
-using System.IO;
+using Harmony12;
+using System;
+using System.Reflection;
 using UnityEngine;
+using UnityModManagerNet;
 
 namespace CameraZoom
 {
-    // Improves the range you can zoom - for original see https://github.com/SonicZentropy/PoE2Mods.pw
-    [ModifiesType("Game.SyncCameraOrthoSettings")]
-    public class SyncCameraOrthoSettingsNew : SyncCameraOrthoSettings
+#if DEBUG
+    [EnableReloading]
+#endif
+    static class Main
     {
-        [NewMember]
-        private float MaxZoom;
+        public static bool enabled;
+        public static UnityModManager.ModEntry mod;
+        public static Settings settings;
 
-        [NewMember]
-        bool ConfigHasBeenInit;
-
-        [ModifiesMember("SetZoomLevel")]
-        public void SetZoomLevelNew(float zoomLevel, bool force)
+        static bool Load(UnityModManager.ModEntry modEntry)
         {
-            if (float.IsNaN(zoomLevel))
+            try
             {
-                zoomLevel = 1f;
+                HarmonyInstance instance = HarmonyInstance.Create(modEntry.Info.Id);
+                instance.PatchAll(Assembly.GetExecutingAssembly());
+
+                settings = Settings.Load<Settings>(modEntry);
+
+                mod = modEntry;
+                enabled = modEntry.Enabled;
+                modEntry.OnToggle = OnToggle;
+
+                modEntry.OnShowGUI = OnShowGui;
+                modEntry.OnGUI = OnGUI;
+                modEntry.OnSaveGUI = OnSaveGUI;
+
+#if DEBUG
+                modEntry.OnUnload = Unload;
+#endif
+                SetZoomLevel();
             }
-            if (SyncCameraOrthoSettings.s_IgnoreCameraZoomRange)
+            catch (Exception ex)
             {
-                this.m_targetZoomLevel = zoomLevel;
+                LogError(ex);
             }
-            else
-            {
-                this.m_targetZoomLevel = Mathf.Clamp(zoomLevel, GameState.Option.MinZoom, MaxZoom);
-            }
-            if (force)
-            {
-                this.m_currentZoomLevel = this.m_targetZoomLevel;
-            }
-            this.UpdateZoom();
+
+            return true;
         }
 
-        [ModifiesMember("Update")]
-        public void UpdateNew()
+        static bool OnToggle(UnityModManager.ModEntry modEntry, bool value)
         {
-            if (!ConfigHasBeenInit)
-            {
-                ConfigHasBeenInit = true;
-                UserConfig userConfig = new UserConfig(Directory.GetCurrentDirectory() + "Mods", "CameraZoom", "config");
-                MaxZoom = userConfig.GetValueAsFloat("CameraZoomMod", "MaxZoom");
-                m_targetZoomLevel = 1.0f;
-            }
+            enabled = modEntry.Enabled;
+            SetZoomLevel();
+#if DEBUG
+            Main.Log("Enabled set to: " + enabled);
+#endif
+            return true;
+        }
 
-            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Z))
-            {
-                m_targetZoomLevel = 1.0f;
-            }
+        static void OnSaveGUI(UnityModManager.ModEntry modEntry)
+        {
+            settings.Save(modEntry);
+            SetZoomLevel();
+        }
 
-            if (this.ScreenWidth != this.m_previousScreenWidth || this.ScreenHeight != this.m_previousScreenHeight)
+        static void OnShowGui(UnityModManager.ModEntry modEntry)
+        {
+            settings.CurrentZoom = GameRender.Instance.GetSyncCameraOrthoSettings().GetZoomLevel();
+        }
+
+        static void OnGUI(UnityModManager.ModEntry modEntry)
+        {
+            settings.Draw(modEntry);
+            if (GUILayout.Button("Restore defaults"))
             {
-                this.m_previousScreenWidth = this.ScreenWidth;
-                this.m_previousScreenHeight = this.ScreenHeight;
-                this.SetZoomLevel(this.GetZoomLevel(), true);
-            }
-            bool flag = this.m_currentZoomLevel != this.m_targetZoomLevel;
-            this.m_currentZoomLevel = Mathf.Lerp(this.m_currentZoomLevel, this.m_targetZoomLevel, Mathf.Clamp01(TimeController.UnscaledDeltaTime * this.ZoomLerpStrength));
-            if (flag)
+                settings.SetDefaultValues(modEntry);
+            };
+        }
+
+#if DEBUG
+        static bool Unload(UnityModManager.ModEntry modEntry)
+        {
+            HarmonyInstance instance = HarmonyInstance.Create(modEntry.Info.Id);
+            instance.UnpatchAll();
+            return true;
+        }
+#endif
+
+        public static void Log(string logValue)
+        {
+            mod?.Logger.Log(logValue);
+        }
+
+        public static void LogError(Exception ex)
+        {
+            Log($"{ex.Message}\n{ex.StackTrace}");
+        }
+
+        static public void SaveZoomLevel()
+        {
+            try
             {
-                this.UpdateZoom();
+                settings.CurrentZoom = GameRender.Instance.GetSyncCameraOrthoSettings().GetZoomLevel();
+            } catch(Exception ex)
+            {
+                LogError(ex);
             }
+        }
+
+        static public void SetZoomLevel()
+        {
+            try
+            {
+                if (!enabled)
+                {
+                    GameState.Option.MinZoom = Settings.DefaultMinimumZoom;
+                    GameState.Option.MaxZoom = Settings.DefaultMaximumZoom;
+                    GameRender.Instance.GetSyncCameraOrthoSettings().SetZoomLevel(Settings.DefaultZoomLevel, true);
+                }
+                else
+                {
+                    GameState.Option.MinZoom = settings.MinimumZoom;
+                    GameState.Option.MaxZoom = settings.MaximumZoom;
+                    GameRender.Instance.GetSyncCameraOrthoSettings().SetZoomLevel(settings.CurrentZoom, true);
+                }
+            } catch(Exception ex)
+            {
+                LogError(ex);
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(GameResources), "LoadGame", MethodType.Normal)]
+    static class LoadChanges
+    {
+        static void Prefix()
+        {
+            if (Main.enabled)
+                Main.SaveZoomLevel();
+        }
+    }
+
+    [HarmonyPatch(typeof(GameState), "FinalizeLevelLoad", MethodType.Normal)]
+    static class PostLevelLoad
+    {
+        static void Postfix()
+        {
+            if (Main.enabled)
+                Main.SetZoomLevel();
         }
     }
 }

@@ -2,6 +2,10 @@
 = Disable Autosave =
 ====================
 
+Release 1.0.0.5 (09/05 - 2020)
+-------------------------------
+Conversion to Unity Mod Manager
+
 Release 1.0.0.4 (23/03 - 2018)
 -------------------------------
 Maintenance release

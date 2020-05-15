@@ -1,10 +1,7 @@
-﻿using Patchwork;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 namespace CombatLogExporter.Configuration
 {
-    [NewType]
     public abstract class CombatConfiguration
     {
         /// <summary>
