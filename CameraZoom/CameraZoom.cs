@@ -99,8 +99,12 @@ namespace CameraZoom
         {
             try
             {
-                settings.CurrentZoom = GameRender.Instance.GetSyncCameraOrthoSettings().GetZoomLevel();
-            } catch(Exception ex)
+                if (settings != null)
+                {
+                    settings.CurrentZoom = GameRender.Instance?.GetSyncCameraOrthoSettings()?.GetZoomLevel() ?? 1.0f;
+                }
+            }
+            catch (Exception ex)
             {
                 LogError(ex);
             }
@@ -122,7 +126,8 @@ namespace CameraZoom
                     GameState.Option.MaxZoom = settings.MaximumZoom;
                     GameRender.Instance.GetSyncCameraOrthoSettings().SetZoomLevel(settings.CurrentZoom, true);
                 }
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 LogError(ex);
             }
