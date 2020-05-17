@@ -66,7 +66,6 @@
     <Compile Include="SmarterUnpauseImplementation.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="config.ini" />
     <None Include="info.json" />
     <None Include="packages.config" />
     <None Include="Repository.json" />
