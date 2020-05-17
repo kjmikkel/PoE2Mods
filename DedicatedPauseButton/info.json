@@ -6,5 +6,6 @@
   "ManagerVersion": "0.22.3.0",
   "GameVersion": "5.0.0040",
   "AssemblyName": "DedicatedPauseButton.dll",
-  "EntryMethod": "DedicatedPauseButton.Main.Load"
+  "EntryMethod": "DedicatedPauseButton.Main.Load",
+  "Repository": "https://raw.githubusercontent.com/kjmikkel/PoE2Mods/master/DedicatedPauseButton/Repository.json"
 }

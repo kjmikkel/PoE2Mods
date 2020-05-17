@@ -6,5 +6,6 @@
   "ManagerVersion": "0.22.3.0",
   "GameVersion": "5.0.0040",
   "AssemblyName": "CameraZoom.dll",
-  "EntryMethod": "CameraZoom.Main.Load"
+  "EntryMethod": "CameraZoom.Main.Load",
+  "Repository": "https://raw.githubusercontent.com/kjmikkel/PoE2Mods/master/CameraZoom/Repository.json"
 }
