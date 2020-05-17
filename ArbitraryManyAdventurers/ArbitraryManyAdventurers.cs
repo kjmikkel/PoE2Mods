@@ -1,19 +1,17 @@
-﻿using Game;
+﻿using Game.UI;
 using HarmonyLib;
 using System;
 using System.Reflection;
 using UnityModManagerNet;
 
-namespace DisableAutosave
+namespace ArbitraryManyAdventurers
 {
-    // Completely disables autosaves - for original see https://github.com/SonicZentropy/PoE2Mods.
 #if DEBUG
     [EnableReloading]
 #endif
     static class Main
     {
         public static bool enabled;
-
         public static UnityModManager.ModEntry mod;
 
         static bool Load(UnityModManager.ModEntry modEntry)
@@ -22,9 +20,11 @@ namespace DisableAutosave
             {
                 Harmony instance = new Harmony(modEntry.Info.Id);
                 instance.PatchAll(Assembly.GetExecutingAssembly());
+
                 mod = modEntry;
                 enabled = modEntry.Enabled;
                 modEntry.OnToggle = OnToggle;
+
 #if DEBUG
                 modEntry.OnUnload = Unload;
 #endif
@@ -65,14 +65,19 @@ namespace DisableAutosave
             Log($"{ex.Message}\n{ex.StackTrace}");
         }
     }
-    
-    [HarmonyPatch(typeof(GameState), "Autosave", MethodType.Normal)]
-    static class Deadfire_Autosave_New
+
+    /// <summary>
+    /// Normally the number of player made adventureres would be capped at 8, but now there is always more room for adventurers
+    /// </summary>
+    [HarmonyPatch(typeof(UIRecruitAdventurerElement), "SpaceToHire")]
+    static class AllwaysMoreSpace
     {
-        static bool Prefix()
+        static void Postfix(ref bool __result)
         {
-            return !Main.enabled;
+            if (!Main.enabled)
+                return;
+
+            __result = true;
         }
     }
-    
 }

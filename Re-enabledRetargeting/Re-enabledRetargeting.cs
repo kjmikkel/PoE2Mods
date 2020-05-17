@@ -1,5 +1,5 @@
 ﻿using Game.UI;
-using Harmony12;
+using HarmonyLib;
 using System;
 using System.Reflection;
 using UnityModManagerNet;
@@ -18,7 +18,7 @@ namespace Re_enabledRetargeting
         {
             try
             {
-                HarmonyInstance instance = HarmonyInstance.Create(modEntry.Info.Id);
+                Harmony instance = new Harmony(modEntry.Info.Id);
                 instance.PatchAll(Assembly.GetExecutingAssembly());
 
                 mod = modEntry;
@@ -48,7 +48,7 @@ namespace Re_enabledRetargeting
 #if DEBUG
         static bool Unload(UnityModManager.ModEntry modEntry)
         {
-            HarmonyInstance instance = HarmonyInstance.Create(modEntry.Info.Id);
+            Harmony instance = new Harmony(modEntry.Info.Id);
             instance.UnpatchAll();
             return true;
         }

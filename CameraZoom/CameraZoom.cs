@@ -1,5 +1,5 @@
 ﻿using Game;
-using Harmony12;
+using HarmonyLib;
 using System;
 using System.Reflection;
 using UnityEngine;
@@ -20,7 +20,7 @@ namespace CameraZoom
         {
             try
             {
-                HarmonyInstance instance = HarmonyInstance.Create(modEntry.Info.Id);
+                Harmony instance = new Harmony(modEntry.Info.Id);
                 instance.PatchAll(Assembly.GetExecutingAssembly());
 
                 settings = Settings.Load<Settings>(modEntry);
@@ -64,22 +64,38 @@ namespace CameraZoom
 
         static void OnShowGui(UnityModManager.ModEntry modEntry)
         {
-            settings.CurrentZoom = GameRender.Instance.GetSyncCameraOrthoSettings().GetZoomLevel();
+            try
+            {
+                if (GameRender.Instance?.GetSyncCameraOrthoSettings()?.GetZoomLevel() != null)
+                {
+                    settings.CurrentZoom = GameRender.Instance.GetSyncCameraOrthoSettings().GetZoomLevel();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+            }
         }
 
         static void OnGUI(UnityModManager.ModEntry modEntry)
         {
             settings.Draw(modEntry);
+            GUILayout.BeginVertical();
+            if (GUILayout.Button("Recormended Values"))
+            {
+                settings.SetRecormendedValues(modEntry);
+            }
             if (GUILayout.Button("Restore defaults"))
             {
                 settings.SetDefaultValues(modEntry);
             };
+            GUILayout.EndVertical();
         }
 
 #if DEBUG
         static bool Unload(UnityModManager.ModEntry modEntry)
         {
-            HarmonyInstance instance = HarmonyInstance.Create(modEntry.Info.Id);
+            Harmony instance = new Harmony(modEntry.Info.Id);
             instance.UnpatchAll();
             return true;
         }
@@ -110,21 +126,31 @@ namespace CameraZoom
             }
         }
 
+        /// <summary>
+        /// Set the 
+        /// </summary>
         static public void SetZoomLevel()
         {
             try
             {
-                if (!enabled)
+                if (!enabled && GameRender.Instance?.GetSyncCameraOrthoSettings() != null)
                 {
-                    GameState.Option.MinZoom = Settings.DefaultMinimumZoom;
-                    GameState.Option.MaxZoom = Settings.DefaultMaximumZoom;
-                    GameRender.Instance.GetSyncCameraOrthoSettings().SetZoomLevel(Settings.DefaultZoomLevel, true);
+                    if (GameState.Option != null)
+                    {
+                        GameState.Option.MinZoom = Settings.DefaultMinimumZoom;
+                        GameState.Option.MaxZoom = Settings.DefaultMaximumZoom;
+                        GameRender.Instance.GetSyncCameraOrthoSettings().SetZoomLevel(Settings.DefaultZoomLevel, true);
+                    }
                 }
                 else
                 {
-                    GameState.Option.MinZoom = settings.MinimumZoom;
-                    GameState.Option.MaxZoom = settings.MaximumZoom;
-                    GameRender.Instance.GetSyncCameraOrthoSettings().SetZoomLevel(settings.CurrentZoom, true);
+                    if (settings?.CurrentZoom != null && settings?.MinimumZoom != null && settings?.MaximumZoom != null &&
+                        GameState.Option != null)
+                    {
+                        GameState.Option.MinZoom = settings.MinimumZoom;
+                        GameState.Option.MaxZoom = settings.MaximumZoom;
+                        GameRender.Instance.GetSyncCameraOrthoSettings().SetZoomLevel(settings.CurrentZoom, true);
+                    }
                 }
             }
             catch (Exception ex)
@@ -134,6 +160,9 @@ namespace CameraZoom
         }
     }
 
+    /// <summary>
+    /// Before we start loading a game we save the current zoom value (so that it is not reset)
+    /// </summary>
     [HarmonyPatch(typeof(GameResources), "LoadGame", MethodType.Normal)]
     static class LoadChanges
     {
@@ -144,6 +173,9 @@ namespace CameraZoom
         }
     }
 
+    /// <summary>
+    /// After a level has been loaded the current zoom values are reloaded (min, max, and current)
+    /// </summary>
     [HarmonyPatch(typeof(GameState), "FinalizeLevelLoad", MethodType.Normal)]
     static class PostLevelLoad
     {

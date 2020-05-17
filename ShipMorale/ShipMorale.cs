@@ -1,7 +1,7 @@
 ﻿using Game;
 using Game.GameData;
 using Game.UI;
-using Harmony12;
+using HarmonyLib;
 using Onyx;
 using System;
 using System.Reflection;
@@ -23,7 +23,7 @@ namespace ShipMorale
         {
             try
             {
-                HarmonyInstance instance = HarmonyInstance.Create(modEntry.Info.Id);
+                Harmony instance = new Harmony(modEntry.Info.Id);
                 instance.PatchAll(Assembly.GetExecutingAssembly());
 
                 settings = Settings.Load<Settings>(modEntry);
@@ -78,7 +78,7 @@ namespace ShipMorale
 #if DEBUG
         static bool Unload(UnityModManager.ModEntry modEntry)
         {
-            HarmonyInstance instance = HarmonyInstance.Create(modEntry.Info.Id);
+            Harmony instance = new Harmony(modEntry.Info.Id);
             instance.UnpatchAll();
             return true;
         }
@@ -224,7 +224,6 @@ namespace ShipMorale
     {
         static bool Prefix(ref int value)
         {
-            Main.Log("Setter");
             if (!Main.enabled)
                 return true;
 
@@ -236,12 +235,10 @@ namespace ShipMorale
                 if (value < minimumMorale)
                 {
                     value = minimumMorale;
-                    Main.Log($"Minimum: {value}");
                 }
                 else if (value > maximumMorale)
                 {
                     value = maximumMorale;
-                    Main.Log($"Maximum: {value}");
                 }
             }
             catch (Exception ex)

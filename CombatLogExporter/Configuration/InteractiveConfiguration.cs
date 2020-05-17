@@ -32,13 +32,13 @@ namespace CombatLogExporter.Configuration
                 if (extraExcludeWords != null && extraExcludeWords != "None" && extraExcludeWords.Trim() != string.Empty)
                 {
 #if DEBUG
-                    Main.LogState(null, $"Exclude words: {extraExcludeWords}");
+                    // Main.LogState(null, $"Exclude words: {extraExcludeWords}");
 #endif
                     string[] excludeList = extraExcludeWords.Split(',');
                     for(int i = 0; i < excludeList.Length; i++)
                     {
                         excludeList[i] = excludeList[i].Trim();
-                        Main.Log(excludeList[i]);
+                        // Main.Log(excludeList[i]);
                     }
                     ExcludeWordList.AddRange(excludeList);
                 }

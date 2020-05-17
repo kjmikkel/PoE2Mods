@@ -2,11 +2,11 @@
 using HarmonyLib;
 using System;
 using System.Reflection;
+using UnityEngine;
 using UnityModManagerNet;
 
-namespace DisableAutosave
+namespace DedicatedPauseButton
 {
-    // Completely disables autosaves - for original see https://github.com/SonicZentropy/PoE2Mods.
 #if DEBUG
     [EnableReloading]
 #endif
@@ -15,17 +15,29 @@ namespace DisableAutosave
         public static bool enabled;
 
         public static UnityModManager.ModEntry mod;
+        public static Settings settings;
 
         static bool Load(UnityModManager.ModEntry modEntry)
         {
             try
-            {
+            {            
                 Harmony instance = new Harmony(modEntry.Info.Id);
-                instance.PatchAll(Assembly.GetExecutingAssembly());
+                instance.PatchAll();
                 mod = modEntry;
+                Log("Test");
+                
                 enabled = modEntry.Enabled;
+
+                settings = Settings.Load<Settings>(modEntry);
+
+                modEntry.OnGUI = OnGUI;
+                modEntry.OnUpdate = OnUpdate;
+                modEntry.OnSaveGUI = OnSaveGUI;
                 modEntry.OnToggle = OnToggle;
+                if (enabled)
+                    modEntry.OnUpdate = OnUpdate;
 #if DEBUG
+
                 modEntry.OnUnload = Unload;
 #endif
             }
@@ -37,9 +49,34 @@ namespace DisableAutosave
             return true;
         }
 
+        static void OnSaveGUI(UnityModManager.ModEntry modEntry)
+        {
+            settings.Save(modEntry);
+        }
+
+        static void OnGUI(UnityModManager.ModEntry modEntry)
+        {
+            settings.Draw(modEntry);
+        }
+
+        public 
+
+        static void OnUpdate(UnityModManager.ModEntry modEntry, float dt)
+        {           
+            if (Main.enabled && Main.settings.keyBinding.Pressed())
+            {
+                TimeController.Instance.IsSafePaused = true;
+            }
+        }
+
         static bool OnToggle(UnityModManager.ModEntry modEntry, bool value)
         {
             enabled = modEntry.Enabled;
+            if (enabled)
+                modEntry.OnUpdate = OnUpdate;
+            else
+                modEntry.OnUpdate = null;
+
 #if DEBUG
             Main.Log("Enabled set to: " + enabled);
 #endif
@@ -65,14 +102,4 @@ namespace DisableAutosave
             Log($"{ex.Message}\n{ex.StackTrace}");
         }
     }
-    
-    [HarmonyPatch(typeof(GameState), "Autosave", MethodType.Normal)]
-    static class Deadfire_Autosave_New
-    {
-        static bool Prefix()
-        {
-            return !Main.enabled;
-        }
-    }
-    
 }

@@ -34,8 +34,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony12">
-      <HintPath>..\Packages\0Harmony12.dll</HintPath>
+    <Reference Include="0Harmony, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lib.Harmony.2.0.1\lib\net35\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -68,6 +68,7 @@
   <ItemGroup>
     <None Include="config.ini" />
     <None Include="info.json" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Readme.txt" />
@@ -75,7 +76,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>start XCOPY /Y /R "$(TargetPath)" "D:\Program Files (x86)\GOG Galaxy\Games\Pillars of Eternity II Deadfire\Mods\SmarterUnpause\$(ProjectName).dll*"
-python $(ProjectDir)..\post_build.py $(ProjectDir) $(TargetDir) SmarterUnpause ..\..\ChangeLog.txt ..\..\Readme.txt ..\..\..\License ..\..\info.json</PostBuildEvent>
+    <PostBuildEvent>start XCOPY /Y /R "$(TargetPath)" "D:\Program Files (x86)\GOG Galaxy\Games\Pillars of Eternity II Deadfire\Mods\$(ProjectName)\$(ProjectName).dll*"
+python $(ProjectDir)..\post_build.py $(ProjectDir) $(TargetDir) $(Projectname) ..\..\ChangeLog.txt ..\..\Readme.txt ..\..\..\License ..\..\info.json</PostBuildEvent>
   </PropertyGroup>
 </Project>
