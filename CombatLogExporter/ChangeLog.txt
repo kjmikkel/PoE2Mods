@@ -2,9 +2,9 @@
 = Combat Log Exporter =
 =======================
 
-Release 1.5.0.9 (09/05 - 2020):
+Release 2.0.0 (18/05 - 2020):
 -------------------------------
-Maintenance release
+Conversion to Unity Mod Manager
 
 Release 1.5.0.8 (23/03 - 2018):
 -------------------------------
