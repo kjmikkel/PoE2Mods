@@ -7,5 +7,6 @@
   "GameVersion": "5.0.0040",
   "AssemblyName": "ShipMorale.dll",
   "EntryMethod": "ShipMorale.Main.Load",
+  "HomePage": "https://www.nexusmods.com/pillarsofeternity2/mods/256",
   "Repository": "https://raw.githubusercontent.com/kjmikkel/PoE2Mods/master/ShipMorale/Repository.json"
 }
