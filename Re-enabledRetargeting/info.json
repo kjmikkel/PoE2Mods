@@ -1,5 +1,5 @@
 {
-  "Id": "com.kjmikkel.Re-enabledRetargeting",
+  "Id": "com.silentStatic.Re-enabledRetargeting",
   "DisplayName": "Re-enabled Retargeting",
   "Author": "silentStatic",
   "Version": "2.0.0",
@@ -7,5 +7,6 @@
   "GameVersion": "5.0.0040",
   "AssemblyName": "Re-enabledRetargeting.dll",
   "EntryMethod": "Re_enabledRetargeting.Main.Load",
+  "HomePage": "https://www.nexusmods.com/pillarsofeternity2/mods/331",
   "Repository": "https://raw.githubusercontent.com/kjmikkel/PoE2Mods/master/Re-enabledRetargeting/Repository.json"
 }
