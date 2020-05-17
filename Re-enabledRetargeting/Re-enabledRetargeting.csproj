@@ -73,6 +73,6 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>start XCOPY /Y /R "$(TargetPath)" "D:\Program Files (x86)\GOG Galaxy\Games\Pillars of Eternity II Deadfire\Mods\$(ProjectName)\$(ProjectName).dll*"
-python $(ProjectDir)..\post_build.py $(ProjectDir) $(TargetDir) $(ProjectName) ..\..\ChangeLog.txt ..\..\Readme.txt ..\..\info.json ..\..\..\License</PostBuildEvent>
+python $(ProjectDir)..\post_build.py $(ProjectDir) $(TargetDir) $(ProjectName) ..\..\ChangeLog.txt ..\..\Readme.txt ..\..\info.json ..\..\..\License.txt</PostBuildEvent>
   </PropertyGroup>
 </Project>

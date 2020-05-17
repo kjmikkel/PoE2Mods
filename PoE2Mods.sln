@@ -25,7 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShipMorale", "ShipMorale\Sh
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MyLicense", "MyLicense", "{C251B6AA-3B58-478E-A3A1-7B98A6B1A295}"
 	ProjectSection(SolutionItems) = preProject
-		LICENSE = LICENSE
+		LICENSE.txt = LICENSE.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SonicZentropyLicense", "SonicZentropyLicense", "{63D124A3-19FB-4AFD-87B6-DC27A7B6EF13}"
