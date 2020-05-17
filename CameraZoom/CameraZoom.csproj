@@ -70,6 +70,7 @@
   <ItemGroup>
     <None Include="info.json" />
     <None Include="packages.config" />
+    <None Include="Repository.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

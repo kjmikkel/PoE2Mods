@@ -66,6 +66,7 @@
   <ItemGroup>
     <None Include="info.json" />
     <None Include="packages.config" />
+    <None Include="Repository.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ChangeLog.txt" />
