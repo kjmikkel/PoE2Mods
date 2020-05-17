@@ -1,10 +1,11 @@
 {
-  "Id": "ArbitraryManyAdventurers",
+  "Id": "com.kjmikkel.ArbitraryManyAdventurers",
   "DisplayName": "Arbitrary Many Adventurers",
   "Author": "silentStatic",
   "Version": "1.0.0",
   "ManagerVersion": "0.22.3.0",
   "GameVersion": "5.0.0040",
   "AssemblyName": "ArbitraryManyAdventurers.dll",
-  "EntryMethod": "ArbitraryManyAdventurers.Main.Load"
+  "EntryMethod": "ArbitraryManyAdventurers.Main.Load",
+  "Repository": "https://raw.githubusercontent.com/kjmikkel/PoE2Mods/master/ArbitraryManyAdventurers/Repository.json"
 }
