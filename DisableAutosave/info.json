@@ -1,5 +1,5 @@
 {
-  "Id": "DisableAutosave",
+  "Id": "com.silentStatic.DisableAutosave",
   "DisplayName": "Disable Autosave",
   "Author": "silentStatic",
   "Version": "2.0.0",
