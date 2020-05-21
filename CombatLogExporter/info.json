@@ -7,5 +7,6 @@
   "GameVersion": "5.0.0040",
   "AssemblyName": "CombatLogExporter.dll",
   "EntryMethod": "CombatLogExporter.Main.Load",
+  "HomePage": "https://www.nexusmods.com/pillarsofeternity2/mods/103",
   "Repository": "https://raw.githubusercontent.com/kjmikkel/PoE2Mods/master/CombatLogExporter/Repository.json"
 }
