@@ -68,17 +68,23 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ChangeLog.txt" />
-    <Content Include="Readme.txt" />
+    <None Include="ChangeLog.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Readme.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="info.json" />
+    <None Include="info.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Repository.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>start XCOPY /Y /R "$(TargetPath)" "D:\Program Files (x86)\GOG Galaxy\Games\Pillars of Eternity II Deadfire\Mods\DisableAutosave\$(ProjectName).dll*"
-python $(ProjectDir)..\post_build.py $(ProjectDir) $(TargetDir) DisableAutosave ..\..\ChangeLog.txt ..\..\Readme.txt ..\..\info.json ..\..\..\License</PostBuildEvent>
+    <PostBuildEvent>python $(ProjectDir)..\copy_files.py --ModName $(ProjectName) --TargetDir $(TargetDir)
+python $(ProjectDir)..\post_build.py --ModName $(ProjectName) --TargetDir $(TargetDir) --License Sonic</PostBuildEvent>
   </PropertyGroup>
 </Project>
