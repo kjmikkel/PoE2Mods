@@ -2,7 +2,7 @@
 = Smarter Unpause =
 ===================
 
-Release 2.0.0 (18/05 - 2020):
+Release 2.0.0 (21/05 - 2020):
 -------------------------------
 Conversion to Unity Mod Manager
 
