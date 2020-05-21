@@ -9,7 +9,7 @@ This mod allows you to change the limits for how far you can zoom in and how far
 
 0 is the absolute minimum (and at that point you have basically placed the camera right over the ground). The textures will at this zoom level look very blurry, as they were not prerendered for this level of detail. 
 
-There is not theoretical upper bound, but at around 4 you cannot zoom out any further on most maps (you can set it higher and try to zoom out all you want, but nothing will happen).
+There is not theoretical upper bound, but at around 7 or 8 you cannot zoom out any further on most maps (you can set it higher and try to zoom out all you want, but nothing will happen).
 
 There is a handy button to restore the defaults (and reset the zoom level to 1).
 
