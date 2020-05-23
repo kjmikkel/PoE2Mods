@@ -1,4 +1,4 @@
-﻿Camera Zoom - 1.0.0
+﻿Camera Zoom Unlocker - 1.0.0
 
 :: REQUIREMENTS ::
 * Deadfire at version 5.0.0.0040
@@ -15,4 +15,4 @@ There is a handy button to restore the defaults (and reset the zoom level to 1).
 
 Now go out there and enjoy the beauty of the Deadfire!
 
-[1]: The overworld map zoom uses an entirely different system that is harder to modify the zoom interval for. I may get around to it, but I am not promising any.
+[1]: The overworld map zoom uses an entirely different system that is harder to modify the zoom interval for. I may get around to it, but I am not promising anything.

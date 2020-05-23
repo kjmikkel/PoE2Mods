@@ -1,6 +1,6 @@
 ﻿using UnityModManagerNet;
 
-namespace CameraZoom
+namespace CameraZoomUnlocker
 {
     public class Settings : UnityModManager.ModSettings, IDrawable
     {

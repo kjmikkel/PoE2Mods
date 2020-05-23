@@ -1,0 +1,12 @@
+{
+  "Id": "com.silentStatic.CameraZoomUnlocker",
+  "DisplayName": "Camera Zoom Unlocker",
+  "Author": "silentStatic",
+  "Version": "1.0.0",
+  "ManagerVersion": "0.22.3.0",
+  "GameVersion": "5.0.0040",
+  "AssemblyName": "CameraZoomUnlocker.dll",
+  "EntryMethod": "CameraZoomUnlocker.Main.Load",
+  "HomePage": "https://www.nexusmods.com/pillarsofeternity2/mods/430",
+  "Repository": "https://raw.githubusercontent.com/kjmikkel/PoE2Mods/master/CameraZoomUnlocker/Repository.json"
+}

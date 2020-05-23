@@ -19,8 +19,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisableAutosave", "DisableAutosave\DisableAutosave.csproj", "{BA223B04-6210-4EEA-9CC3-B77D2E63C2EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraZoom", "CameraZoom\CameraZoom.csproj", "{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShipMorale", "ShipMorale\ShipMorale.csproj", "{FD4B419F-0087-4EB0-85A1-0900E4DA616A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MyLicense", "MyLicense", "{C251B6AA-3B58-478E-A3A1-7B98A6B1A295}"
@@ -38,6 +36,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArbitraryManyAdventurers", "ArbitraryManyAdventurers\ArbitraryManyAdventurers.csproj", "{C41067E2-0E3D-472C-9A77-F2898E284E25}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DedicatedPauseButton", "DedicatedPauseButton\DedicatedPauseButton.csproj", "{2D7971F9-B6BA-4483-B8F4-946F178A305F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraZoomUnlocker", "CameraZoomUnlocker\CameraZoomUnlocker.csproj", "{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -155,38 +155,6 @@ Global
 		{BA223B04-6210-4EEA-9CC3-B77D2E63C2EF}.winphone_Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA223B04-6210-4EEA-9CC3-B77D2E63C2EF}.winphone_Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA223B04-6210-4EEA-9CC3-B77D2E63C2EF}.winphone_Release|Any CPU.Build.0 = Release|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_2_0_Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_2_0_Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_2_0_Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_2_0_Release|Any CPU.Build.0 = Release|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_3_5_Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_3_5_Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_3_5_Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_3_5_Release|Any CPU.Build.0 = Release|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_4_0_Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_4_0_Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_4_0_Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_4_0_Release|Any CPU.Build.0 = Release|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_4_5_Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_4_5_Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_4_5_Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_4_5_Release|Any CPU.Build.0 = Release|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.PrepareEnvironment|Any CPU.ActiveCfg = Release|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.PrepareEnvironment|Any CPU.Build.0 = Release|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.Publish|Any CPU.ActiveCfg = Release|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.Publish|Any CPU.Build.0 = Release|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.silverlight_Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.silverlight_Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.silverlight_Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.silverlight_Release|Any CPU.Build.0 = Release|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.winphone_Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.winphone_Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.winphone_Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.winphone_Release|Any CPU.Build.0 = Release|Any CPU
 		{FD4B419F-0087-4EB0-85A1-0900E4DA616A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FD4B419F-0087-4EB0-85A1-0900E4DA616A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD4B419F-0087-4EB0-85A1-0900E4DA616A}.net_2_0_Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -315,6 +283,38 @@ Global
 		{2D7971F9-B6BA-4483-B8F4-946F178A305F}.winphone_Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D7971F9-B6BA-4483-B8F4-946F178A305F}.winphone_Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D7971F9-B6BA-4483-B8F4-946F178A305F}.winphone_Release|Any CPU.Build.0 = Release|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_2_0_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_2_0_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_2_0_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_2_0_Release|Any CPU.Build.0 = Release|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_3_5_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_3_5_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_3_5_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_3_5_Release|Any CPU.Build.0 = Release|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_4_0_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_4_0_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_4_0_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_4_0_Release|Any CPU.Build.0 = Release|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_4_5_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_4_5_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_4_5_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.net_4_5_Release|Any CPU.Build.0 = Release|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.PrepareEnvironment|Any CPU.ActiveCfg = Release|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.PrepareEnvironment|Any CPU.Build.0 = Release|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.Publish|Any CPU.ActiveCfg = Release|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.Publish|Any CPU.Build.0 = Release|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.silverlight_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.silverlight_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.silverlight_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.silverlight_Release|Any CPU.Build.0 = Release|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.winphone_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.winphone_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.winphone_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.winphone_Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,7 +5,7 @@ using System.Reflection;
 using UnityEngine;
 using UnityModManagerNet;
 
-namespace CameraZoom
+namespace CameraZoomUnlocker
 {
 #if DEBUG
     [EnableReloading]
