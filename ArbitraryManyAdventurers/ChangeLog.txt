@@ -2,6 +2,6 @@
 = Arbitrary Many Adventurers =
 ==============================
 
-Release 1.0.0.0 (15/05 - 2020):
+Release 1.0.0.0 (23/05 - 2020):
 -------------------------------
 Initial release

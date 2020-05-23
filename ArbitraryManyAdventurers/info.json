@@ -7,5 +7,6 @@
   "GameVersion": "5.0.0040",
   "AssemblyName": "ArbitraryManyAdventurers.dll",
   "EntryMethod": "ArbitraryManyAdventurers.Main.Load",
+  "HomePage": "https://www.nexusmods.com/pillarsofeternity2/mods/432",
   "Repository": "https://raw.githubusercontent.com/kjmikkel/PoE2Mods/master/ArbitraryManyAdventurers/Repository.json"
 }
