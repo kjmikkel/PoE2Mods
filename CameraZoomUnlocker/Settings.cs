@@ -1,4 +1,5 @@
-﻿using UnityModManagerNet;
+﻿using System.ComponentModel;
+using UnityModManagerNet;
 
 namespace CameraZoomUnlocker
 {
@@ -86,15 +87,16 @@ namespace CameraZoomUnlocker
         {
             this.MinimumZoom = DefaultMinimumZoom;
             this.MaximumZoom = DefaultMaximumZoom;
+            this.CurrentZoom = DefaultZoomLevel;
             Save(this, modEntry);
             GameRender.Instance.GetSyncCameraOrthoSettings().SetZoomLevel(DefaultZoomLevel, true);
         }
 
         /// <summary>
-        /// Set Recormended zoom values
+        /// Set recommended zoom values
         /// </summary>
         /// <param name="modEntry">The mod object</param>
-        public void SetRecormendedValues(UnityModManager.ModEntry modEntry)
+        public void SetRecommendedValues(UnityModManager.ModEntry modEntry)
         {
             this.MinimumZoom = RecommendedMinimumZoom;
             this.MaximumZoom = RecommendedMaximumZoom;

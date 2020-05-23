@@ -83,7 +83,7 @@ namespace CameraZoomUnlocker
             GUILayout.BeginVertical();
             if (GUILayout.Button("Recormended Values"))
             {
-                settings.SetRecormendedValues(modEntry);
+                settings.SetRecommendedValues(modEntry);
             }
             if (GUILayout.Button("Restore defaults"))
             {
