@@ -7,7 +7,7 @@ Uses the Unity Mod Manager (https://www.nexusmods.com/site/mods/21) for patching
 ## Arbitray Many Adventurers
 Allows you to create more than 8 adventurers at inns.
 
-## CameraZoom
+## CameraZoomUnlocker
 A mod made by [SonicZentropy](https://github.com/SonicZentropy/PoE2Mods.pw) that I have heavily modified.
 
 A mod to set the minimum and maximum zoom distance
