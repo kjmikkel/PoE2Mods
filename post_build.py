@@ -10,10 +10,10 @@ def make_folder_if_not_exist(directory):
 def GetLicense(x):
   result = {
     'My': "License",
-    'Sonic': "SonicZentropyLicense"
+    'Sonic': "../../../SonicZentropyLicense"
   }.get(x, None)
   if result:
-    result = "..\..\..\%s.txt" % result
+    result = "%s.txt" % result
   return result
 
 parser = argparse.ArgumentParser(description='Perform post-build actions')

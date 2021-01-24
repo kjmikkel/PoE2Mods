@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using UnityModManagerNet;
+﻿using UnityModManagerNet;
 
 namespace CameraZoomUnlocker
 {

@@ -80,6 +80,9 @@
     <Content Include="ChangeLog.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="LICENSE.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Readme.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

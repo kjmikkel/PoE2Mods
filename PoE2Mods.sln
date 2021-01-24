@@ -10,7 +10,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B4C1CF00-C757-4503-9993-E8A2BC89848B}"
 	ProjectSection(SolutionItems) = preProject
 		CompileAll.bat = CompileAll.bat
-		GOG.bat = GOG.bat
 		handle_copy.py = handle_copy.py
 		OpenAssembly.bat = OpenAssembly.bat
 		README.MD = README.MD
@@ -20,11 +19,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisableAutosave", "DisableAutosave\DisableAutosave.csproj", "{BA223B04-6210-4EEA-9CC3-B77D2E63C2EF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShipMorale", "ShipMorale\ShipMorale.csproj", "{FD4B419F-0087-4EB0-85A1-0900E4DA616A}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MyLicense", "MyLicense", "{C251B6AA-3B58-478E-A3A1-7B98A6B1A295}"
-	ProjectSection(SolutionItems) = preProject
-		LICENSE.txt = LICENSE.txt
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SonicZentropyLicense", "SonicZentropyLicense", "{63D124A3-19FB-4AFD-87B6-DC27A7B6EF13}"
 	ProjectSection(SolutionItems) = preProject
@@ -38,6 +32,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DedicatedPauseButton", "DedicatedPauseButton\DedicatedPauseButton.csproj", "{2D7971F9-B6BA-4483-B8F4-946F178A305F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraZoomUnlocker", "CameraZoomUnlocker\CameraZoomUnlocker.csproj", "{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CombatSpeedConfigurer", "CombatSpeedConfigurer\CombatSpeedConfigurer.csproj", "{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -315,12 +311,43 @@ Global
 		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.winphone_Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.winphone_Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A43EA23-67AE-4345-BD09-4F06A93BAB4C}.winphone_Release|Any CPU.Build.0 = Release|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.net_2_0_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.net_2_0_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.net_2_0_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.net_2_0_Release|Any CPU.Build.0 = Release|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.net_3_5_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.net_3_5_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.net_3_5_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.net_3_5_Release|Any CPU.Build.0 = Release|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.net_4_0_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.net_4_0_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.net_4_0_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.net_4_0_Release|Any CPU.Build.0 = Release|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.net_4_5_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.net_4_5_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.net_4_5_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.net_4_5_Release|Any CPU.Build.0 = Release|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.PrepareEnvironment|Any CPU.ActiveCfg = Release|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.PrepareEnvironment|Any CPU.Build.0 = Release|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.Publish|Any CPU.ActiveCfg = Release|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.Publish|Any CPU.Build.0 = Release|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.silverlight_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.silverlight_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.silverlight_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.silverlight_Release|Any CPU.Build.0 = Release|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.winphone_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.winphone_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.winphone_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}.winphone_Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{C251B6AA-3B58-478E-A3A1-7B98A6B1A295} = {B4C1CF00-C757-4503-9993-E8A2BC89848B}
 		{63D124A3-19FB-4AFD-87B6-DC27A7B6EF13} = {B4C1CF00-C757-4503-9993-E8A2BC89848B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

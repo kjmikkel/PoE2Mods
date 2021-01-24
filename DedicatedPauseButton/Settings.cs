@@ -1,5 +1,4 @@
-﻿using System.Xml.Serialization;
-using UnityModManagerNet;
+﻿using UnityModManagerNet;
 
 namespace DedicatedPauseButton
 {

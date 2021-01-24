@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CB24F959-F99C-4837-92E0-0F07D9B63FA6}</ProjectGuid>
+    <ProjectGuid>{E0F04A40-37FD-4756-88AF-87FBB7E2B6AD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Re_enabledRetargeting</RootNamespace>
-    <AssemblyName>Re-enabledRetargeting</AssemblyName>
+    <RootNamespace>CombatSpeedConfigurer</RootNamespace>
+    <AssemblyName>CombatSpeedConfigurer</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <Deterministic>false</Deterministic>
-    <TargetFrameworkProfile />
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,8 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lib.Harmony.2.0.1\lib\net35\0Harmony.dll</HintPath>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\..\Tyranny\Packages\Lib.Harmony.2.0.1\lib\net35\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\Packages\Assembly-CSharp.dll</HintPath>
@@ -58,30 +57,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CombatSpeedConfigurer.cs" />
+    <Compile Include="CombatSpeedSetting.cs" />
+    <Compile Include="Configurator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Re-enabledRetargeting.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ChangeLog.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LICENSE.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Readme.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="info.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="packages.config" />
-    <None Include="Repository.json" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="WrapAroundList.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>python $(ProjectDir)..\copy_files.py --ModName $(ProjectName) --TargetDir $(TargetDir)
-python $(ProjectDir)..\post_build.py --ModName $(ProjectName) --TargetDir $(TargetDir) --License My</PostBuildEvent>
-  </PropertyGroup>
 </Project>

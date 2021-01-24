@@ -7,5 +7,6 @@
   "GameVersion": "5.0.0040",
   "AssemblyName": "DedicatedPauseButton.dll",
   "EntryMethod": "DedicatedPauseButton.Main.Load",
+  "HomePage": "https://www.nexusmods.com/pillarsofeternity2/mods/433",
   "Repository": "https://raw.githubusercontent.com/kjmikkel/PoE2Mods/master/DedicatedPauseButton/Repository.json"
 }

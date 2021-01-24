@@ -1,9 +1,14 @@
-﻿using Game;
+﻿using DedicatedPauseButton;
+using Game;
 using HarmonyLib;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using UnityEngine;
 using UnityModManagerNet;
 
-namespace DedicatedPauseButton
+namespace CombatSpeedConfigurer
 {
 #if DEBUG
     [EnableReloading]
@@ -18,11 +23,11 @@ namespace DedicatedPauseButton
         static bool Load(UnityModManager.ModEntry modEntry)
         {
             try
-            {            
+            {
                 Harmony instance = new Harmony(modEntry.Info.Id);
                 instance.PatchAll();
                 mod = modEntry;
-                
+
                 enabled = modEntry.Enabled;
 
                 settings = Settings.Load<Settings>(modEntry);
@@ -53,15 +58,17 @@ namespace DedicatedPauseButton
         static void OnGUI(UnityModManager.ModEntry modEntry)
         {
             settings.Draw(modEntry);
+
+
         }
 
-        public 
+        public
 
         static void OnUpdate(UnityModManager.ModEntry modEntry, float dt)
-        {           
-            if (Main.enabled && Main.settings.keyBinding.Pressed())
+        {
+            if (Main.enabled && Main.settings.keyBindingSpeedOne.Pressed())
             {
-                TimeController.Instance.IsSafePaused = true;
+                GameState.Option.CombatSpeed = 1;
             }
         }
 
@@ -98,4 +105,3 @@ namespace DedicatedPauseButton
             Log($"{ex.Message}\n{ex.StackTrace}");
         }
     }
-}
