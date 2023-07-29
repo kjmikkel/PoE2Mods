@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.352
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmarterUnpause", "SmarterUnpause\SmarterUnpause.csproj", "{66796342-C8AB-4282-92FA-672B5169129A}"
 EndProject
@@ -10,10 +10,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B4C1CF00-C757-4503-9993-E8A2BC89848B}"
 	ProjectSection(SolutionItems) = preProject
 		CompileAll.bat = CompileAll.bat
-		handle_copy.py = handle_copy.py
-		OpenAssembly.bat = OpenAssembly.bat
+		copy_files.py = copy_files.py
+		post_build.py = post_build.py
 		README.MD = README.MD
-		Steam.bat = Steam.bat
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisableAutosave", "DisableAutosave\DisableAutosave.csproj", "{BA223B04-6210-4EEA-9CC3-B77D2E63C2EF}"
