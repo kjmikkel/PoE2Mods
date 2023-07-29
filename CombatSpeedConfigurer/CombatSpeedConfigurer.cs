@@ -2,10 +2,6 @@
 using Game;
 using HarmonyLib;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
 using UnityModManagerNet;
 
 namespace CombatSpeedConfigurer
@@ -105,3 +101,4 @@ namespace CombatSpeedConfigurer
             Log($"{ex.Message}\n{ex.StackTrace}");
         }
     }
+}

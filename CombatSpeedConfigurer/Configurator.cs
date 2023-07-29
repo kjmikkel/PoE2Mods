@@ -73,6 +73,8 @@ namespace CombatSpeedConfigurer
                     }
                 }
             }
+
+            return -1;
         }
     }
 }
